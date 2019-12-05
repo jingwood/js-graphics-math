@@ -5,11 +5,6 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Matrix4 } from "matrix";
-import { BoundingBox } from "bbox";
-
-//////////////////// Vec4 //////////////////////
-
 export class Vec4 {
 	constructor(x, y, z, w) {
 		

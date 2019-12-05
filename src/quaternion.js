@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-Tarumae.Quaternion = class {
+export class Quaternion {
 	constructor() {
 		throw "not available yet";
 	}

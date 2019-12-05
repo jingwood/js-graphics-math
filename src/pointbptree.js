@@ -84,4 +84,4 @@ export class PointBPNode {
 
 		return false;
 	}
-};
+}

@@ -5,9 +5,6 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Matrix4 } from "matrix";
-import { BoundingBox } from "bbox";
-
 export class Color4 {
 	constructor(r, g, b, a) {
 		switch (arguments.length) {

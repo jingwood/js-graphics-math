@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-class Matrix3 {
+export class Matrix3 {
 	constructor(copySource) {
 		if (copySource) {
 			this.copyFrom(copySource);
