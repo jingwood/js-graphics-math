@@ -65,5 +65,5 @@ Functions below available at [src/functions.js](src/functions.js).
 
 ## Vertex interpolation
 
-- calcVertexInterpolation (3D)
-  Calculate the interpolated vertex coordinate on a specified point of a given 3D triangle with vertices coordinates.
+- **calcVertexInterpolation (3D)**
+  Calculate the interpolated vertex coordinate on a specified point of a 3D triangle with vertex coordinates.
