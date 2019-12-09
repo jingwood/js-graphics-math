@@ -1,38 +1,35 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3";
+import { Vec3 } from "./vec3.js";
 
 export class BoundingBox3D {
-	constructor(min, max) {
-		this.set(min, max);
+	constructor() {
+		this.min = new Vec3();
+		this.max = new Vec3();
+
+		this.set(...arguments);
 	}
 
 	set(min, max) {
 		this._dirty = false;
 
 		switch (arguments.length) {
-			case 0:
-				this._min = new Vec3();
-				this._max = new Vec3();
-				break;
-
 			case 1:
-				if (typeof arguments[0] === "object" && arguments[0].min && arguments[0].max) {
-					// get min and max from another boundingbox instance
-					this._min = arguments[0].min;
-					this._max = arguments[0].max;
+				const arg0 = arguments[0];
+				if (typeof arg0 === "object") {
+					this._min.set(arg0.min);
+					this._max.set(arg0.max);
 				}
 				break;
 
-			default:
 			case 2:
-				this._min = min;
-				this._max = max;
+				this._min.set(arguments[0]);
+				this._max.set(arguments[1]);
 				break;
 			
 			case 6:
@@ -100,8 +97,13 @@ export class BoundingBox3D {
 		this._min = Vec3.add(this._min, off);
 		this._origin = Vec3.add(this._origin, off);
 	}
-
+	
+	// @deprecate(containsPoint, "use containsPoint instead")
 	contains(p) {
+		return this.containsPoint(p);
+	}
+
+	containsPoint(p) {
 		return p.x > this._min.x && p.x < this._max.x
 			&& p.y > this._min.y && p.x < this._max.y
 			&& p.z > this._min.x && p.z < this._max.z;
@@ -116,8 +118,8 @@ export class BoundingBox3D {
 	}
 
 	initTo(p) {
-		this._min = p;
-		this._max = p;
+		this._min.set(p);
+		this._max.set(p);
 	}
 
 	expandTo(p) {

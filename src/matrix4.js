@@ -1,11 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3";
+import { Vec3 } from "./vec3.js";
+import { MathFunctions } from "./functions.js";
 
 export class Matrix4 {
 	constructor(copySource) {
@@ -24,8 +25,6 @@ export class Matrix4 {
 		this.a3 = 0; this.b3 = 0; this.c3 = 1; this.d3 = 0;
 		this.a4 = 0; this.b4 = 0; this.c4 = 0; this.d4 = 1;
 		
-		this.updateArray();
-
 		return this;
 	}
 
@@ -34,8 +33,6 @@ export class Matrix4 {
 		this.a2 = m.a2; this.b2 = m.b2; this.c2 = m.c2; this.d2 = m.d2;
 		this.a3 = m.a3; this.b3 = m.b3; this.c3 = m.c3; this.d3 = m.d3;
 		this.a4 = m.a4; this.b4 = m.b4; this.c4 = m.c4; this.d4 = m.d4;
-
-		this.updateArray();
 
 		return this;
 	}
@@ -94,8 +91,6 @@ export class Matrix4 {
 
 		this.a2 = a2; this.b2 = b2; this.c2 = c2; this.d2 = d2;
 		this.a3 = a3; this.b3 = b3; this.c3 = c3; this.d3 = d3;
-		
-		this.updateArray();
 
 		return this;
 	}
@@ -123,8 +118,6 @@ export class Matrix4 {
 
 		this.a1 = a1; this.b1 = b1; this.c1 = c1; this.d1 = d1;
 		this.a3 = a3; this.b3 = b3; this.c3 = c3; this.d3 = d3;
-		
-		this.updateArray();
 
 		return this;
 	}
@@ -152,8 +145,6 @@ export class Matrix4 {
 
 		this.a1 = a1; this.b1 = b1; this.c1 = c1; this.d1 = d1;
 		this.a2 = a2; this.b2 = b2; this.c2 = c2; this.d2 = d2;
-			
-		this.updateArray();
 
 		return this;
 	}
@@ -193,9 +184,13 @@ export class Matrix4 {
 		this.a2 = a2; this.b2 = b2; this.c2 = c2; this.d2 = d2;
 		this.a3 = a3; this.b3 = b3; this.c3 = c3; this.d3 = d3;
 		
-		this.updateArray();
-
 		return this;
+	}
+
+	static makeRotation(x, y, z) {
+		const mat = new Matrix4().loadIdentity();
+		mat.rotateCombine(x, y, z);
+		return mat;
 	}
 
 	translate(x, y, z) {
@@ -204,8 +199,6 @@ export class Matrix4 {
 		this.c4 += this.c1 * x + this.c2 * y + this.c3 * z;
 		this.d4 += this.d1 * x + this.d2 * y + this.d3 * z;
 		
-		this.updateArray();
-
 		return this;
 	}
 
@@ -214,9 +207,7 @@ export class Matrix4 {
 		this.b4 += this.b3 * z;
 		this.c4 += this.c3 * z;
 		this.d4 += this.d3 * z;
-		
-		this.updateArray();
-
+	
 		return this;
 	}
 
@@ -227,8 +218,6 @@ export class Matrix4 {
 		this.a2 *= y; this.b2 *= y; this.c2 *= y; this.d2 *= y;
 		this.a3 *= z; this.b3 *= z; this.c3 *= z; this.d3 *= z;
 		
-		this.updateArray();
-
 		return this;
 	}
 
@@ -298,8 +287,6 @@ export class Matrix4 {
 		this.a3 = m3a3 * detM; this.b3 = m3b3 * detM; this.c3 = m3c3 * detM; this.d3 = m3d3 * detM;
 		this.a4 = m3a4 * detM; this.b4 = m3b4 * detM; this.c4 = m3c4 * detM; this.d4 = m3d4 * detM;
 		
-		this.updateArray();
-
 		return this;
 	}
 
@@ -314,8 +301,6 @@ export class Matrix4 {
 		this.a3 = a3; this.b3 = b3; this.d3 = d3;
 		this.a4 = a4; this.b4 = b4; this.c4 = c4;
 		
-		this.updateArray();
-
 		return this;
 	}
 
@@ -342,9 +327,7 @@ export class Matrix4 {
 		m3.d2 = m1.a2 * m2.d1 + m1.b2 * m2.d2 + m1.c2 * m2.d3 + m1.d2 * m2.d4;
 		m3.d3 = m1.a3 * m2.d1 + m1.b3 * m2.d2 + m1.c3 * m2.d3 + m1.d3 * m2.d4;
 		m3.d4 = m1.a4 * m2.d1 + m1.b4 * m2.d2 + m1.c4 * m2.d3 + m1.d4 * m2.d4;
-		
-		m3.updateArray();
-
+	
 		return m3;
 	}
 
@@ -371,9 +354,7 @@ export class Matrix4 {
 		m3.d2 = m1.d1 * m2.a2 + m1.d2 * m2.b2 + m1.d3 * m2.c2 + m1.d4 * m2.d2;
 		m3.d3 = m1.d1 * m2.a3 + m1.d2 * m2.b3 + m1.d3 * m2.c3 + m1.d4 * m2.d3;
 		m3.d4 = m1.d1 * m2.a4 + m1.d2 * m2.b4 + m1.d3 * m2.c4 + m1.d4 * m2.d4;
-			
-		m3.updateArray();
-
+		
 		return m3;
 	}
 
@@ -391,9 +372,7 @@ export class Matrix4 {
 		this.a2 = 0; this.b2 = near * 2 / y; this.c2 = 0; this.d2 = 0;
 		this.a3 = (right + left) / x; this.b3 = (bottom + top) / y; this.c3 = -(far + near) / z; this.d3 = -1;
 		this.a4 = 0; this.b4 = 0; this.c4 = -(far * near * 2) / z; this.d4 = 0;
-		
-		this.updateArray();
-
+	
 		return this;
 	}
 
@@ -401,9 +380,7 @@ export class Matrix4 {
 		const topRate = near * Math.tan(angle * Math.PI / 360);
 		widthRate = topRate * widthRate;
 		this.frustum(-widthRate, widthRate, -topRate, topRate, near, far);
-		
-		this.updateArray();
-
+	
 		return this;
 	}
 
@@ -418,9 +395,7 @@ export class Matrix4 {
 		this.b4 = -(top + bottom) / y;
 		this.c4 = -(far + near) / z;
 		this.d4 = 1;
-		
-		this.updateArray();
-
+	
 		return this;
 	}
 
@@ -440,8 +415,6 @@ export class Matrix4 {
 	
 		// maybe we can ignore the row 4 like below to get more better performance
 		this.a4 = 0; this.b4 = 0; this.c4 = 0; this.d4 = 1;
-		
-		this.updateArray();
 
 		return this;
 	}
@@ -476,10 +449,6 @@ export class Matrix4 {
 		};
 	}
 
-	toArray() {
-		return this.arr;
-	}
-
 	updateArray() {
 		this.arr[0] = this.a1;
 		this.arr[1] = this.b1;
@@ -502,7 +471,13 @@ export class Matrix4 {
 		this.arr[15] = this.d4;
 	}
 
+	toArray() {
+		this.updateArray();
+		return this.arr;
+	}
+	
 	toFloat32Array() {
+		this.updateArray();
 		return new Float32Array(this.toArray());
 	}
 }

@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.

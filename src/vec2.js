@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
+
+import { toStringWithDigits } from "./utility.js";
 
 export class Vec2 {
 	constructor() {
@@ -62,14 +64,38 @@ export class Vec2 {
 		}
 	}
 
+	static mul(v1, v2) {
+		if (!(v1 instanceof Vec2))
+			return Vec2.NaN;
+		
+		return v1.mul(v2);
+	}
+
 	mulMat(m) {
 		return new Vec2(
 			this.x * m.a1 + this.y * m.a2 + m.a3,
 			this.x * m.b1 + this.y * m.b2 + m.b3);
 	}
 
-	div(s) {
-		return new Vec2(this.x / s, this.y / s);
+	div(dx, dy) {
+		switch (arguments.length) {
+			case 1:
+				if (typeof dx === "object") {
+					return new Vec2(this.x / dx.x, this.y / dx.y);
+				} else {
+					return new Vec2(this.x / dx, this.y / dx);
+				}
+				
+			case 2:
+				return new Vec2(this.x / dx, this.y / dy);
+		}
+	}
+
+	static div(v1, v2) { 
+		if (!(v1 instanceof Vec2))
+			return Vec2.NaN;
+	
+		return v1.div(v2);
 	}
 
 	neg() {
@@ -101,9 +127,16 @@ export class Vec2 {
 		return new Float32Array(this.toArray());
 	}
 
+	equals(v2) {
+		return this.x === v2.x && this.y === v2.y;
+	}
+
+	approxiEquals(v2) {
+		return Math.abs(this.x - v2.x) < 0.00001 && Math.abs(this.y - v2.y) < 0.00001;
+	}
+
 	toString() {
-		const toStringDigits = Tarumae.Utility.NumberExtension.toStringWithDigits;
-		return "[" + toStringDigits(this.x) + ", " + (this.y) + "]";
+		return "[" + toStringWithDigits(this.x) + ", " + (this.y) + "]";
 	}
 
 	dot(v2) {
@@ -129,3 +162,4 @@ export class Vec2 {
 
 Vec2.zero = new Vec2(0, 0);
 Vec2.one = new Vec2(1, 1);
+Vec2.NaN = new Vec2(NaN, NaN);

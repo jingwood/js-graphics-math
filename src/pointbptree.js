@@ -1,12 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Matrix4 } from "matrix";
-import { BoundingBox } from "bbox";
+import { BoundingBox } from "./bbox3";
 
 export class PointBPNode {
 	constructor(inputPoints) {

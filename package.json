@@ -1,0 +1,50 @@
+{
+  "name": "@jingwood/graphics-math",
+  "version": "1.0.0",
+  "description": "Math library for JavaScript 2D/3D graphics rendering.",
+  "main": "dist/mathlib.js",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "webpack --config webpack.prod.js --mode production",
+    "test": "node test/test_vec2.js",
+    "serve": "webpack-dev-server --config webpack.dev.js --mode development",
+    "pub": "npx babel src -d dist"
+  },
+  "keywords": [],
+  "author": "Jingwood",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jingwood/js-mathlib.git"
+  },
+  "type": "module",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "babel-plugin-inline-import": "^3.0.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "glslify": "^7.0.0",
+    "micromatch": "^4.0.2",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.3",
+    "ws": "^7.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/jingwood/js-mathlib/issues"
+  },
+  "homepage": "https://github.com/jingwood/js-mathlib"
+}

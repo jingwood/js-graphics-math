@@ -1,11 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3, Vec4 } from "./vec2"
+import { Vec3 } from "./vec3.js"
+import { Vec4 } from "./vec4.js"
 
 export class MathFunctions {
   

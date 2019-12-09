@@ -1,12 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "vec3"
-import { BoundingBox3D } from "bbox"
+import { Vec3 } from "./vec3"
+import { BoundingBox3D } from "./bbox3"
 
 export class KDNode3D {
   constructor() {

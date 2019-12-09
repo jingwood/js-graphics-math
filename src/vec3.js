@@ -1,18 +1,35 @@
 ////////////////////////////////////////////////////////////////////////////////
-// js-mathlib
+// js-graphics-mathlib
 // Math library for JavaScript 2D/3D graphics rendering.
 //
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Matrix4 } from "matrix";
+import { Matrix4 } from "./matrix4.js";
+import { Vec2 } from "./vec2.js";
 
 export class Vec3 {
-	constructor(x, y, z) {		
-		if (typeof x === "undefined") {
-			this.x = 0; this.y = 0; this.z = 0;
-		} else {
-			this.x = x; this.y = y; this.z = z;
+	constructor() {		
+		this.x = 0; this.y = 0; this.z = 0;
+		this.set(...arguments);
+	}
+
+	set() {
+		switch (arguments.length) {
+			case 1:
+				const arg0 = arguments[0];
+				if (typeof arg0 === "object") {
+					this.x = arg0.x; this.y = arg0.y; this.z = arg0.z;
+				} else if (Array.isArray(arg0)) {
+					this.x = arg0[0]; this.y = arg0[1]; this.z = arg0[2];
+				} else if (!isNaN(arg0)) {
+					this.x = arg0; this.y = arg0; this.z = arg0;
+				}
+				break;
+			
+			case 3:
+				this.x = arguments[0]; this.y = arguments[1]; this.z = arguments[2];
+				break;
 		}
 	}
 
@@ -20,15 +37,11 @@ export class Vec3 {
 		return new Vec2(this.x, this.y);
 	}
 	
-	set(x, y, z) {
-		this.x = x; this.y = y; this.z = z;
-	}
-
 	copyFrom(v) {
 		this.x = v.x; this.y = v.y; this.z = v.z;
 	}
 	
-	setToZero() {
+	zero() {
 		this.x = 0; this.y = 0; this.z = 0;
 	}
 	
@@ -46,8 +59,12 @@ export class Vec3 {
 				return this.x == arguments[0] && this.y == arguments[1] && this.z == arguments[2];
 		}
 	}
-	
+
 	almostSame() {
+		return this.approxiEquals(...arguments);
+	}	
+
+	approxiEquals() {
 		switch (arguments.length) {
 			default:
 				return false;
