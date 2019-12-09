@@ -13,7 +13,8 @@ The following classes available under [src](src) folder.
 - BoundingBox 2D
 - [BoundingBox 3D](src/bbox3.js)
 - KDTree for 2D points
-- [KDTree for 3D points](src/kdtree3.js)
+- KDTree for 3D points
+- KDTree for 3D triangles
 - [OCTree for 3D triangles](src/spacetree.js)
 - [Ray](src/ray.js)
 - [Color3 (RGB)](src/color3.js)
