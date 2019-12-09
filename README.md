@@ -1,2 +1,69 @@
-# js-mathlib
+# js-graphics-math
+
 Math library for JavaScript 2D/3D graphics rendering.
+
+# Classes
+
+The following classes available under [src](src) folder.
+
+- [Vector2](src/vec2.js)
+- [Vector3](src/vec3.js)
+- [Matrix3](src/matrix3.js)
+- [Matrix4](src/matrix4.js)
+- BoundingBox 2D
+- [BoundingBox 3D](src/bbox3.js)
+- KDTree for 2D points
+- [KDTree for 3D points](src/kdtree3.js)
+- [OCTree for 3D triangles](src/spacetree.js)
+- [Ray](src/ray.js)
+- [Color3 (RGB)](src/color3.js)
+- [Color4 (RGBA)](src/color4.js)
+
+# Functions
+
+Functions below available at [src/functions.js](src/functions.js).
+
+## Base math functions
+
+- clamp (1D/2D/3D)
+- smoothstep
+- angleToArc
+
+## Distance measuring
+
+- distancePointToPoint (2D/3D)
+- distancePointToLine (2D)
+- distancePointToLineSegment (2D)
+- distancePointToRect (2D)
+- distancePointToPolygon (2D)
+- findNearestPointToLineSegement (2D)
+- findNearestPointToPolygon (2D)
+
+## Intersecting test
+
+- lineIntersectsLine (2D)
+- lineIntersectsRect (2D)
+- lineIntersectsPolygon (2D)
+- rectIntersectsRect (2D)
+- rectIntersectsPolygon (2D)
+- checkLineParallel
+
+## Containing test
+
+- rectContainsPoint (2D/3D)
+- triangleContainsPoint (3D)
+- polygonContainsPoint (2D)
+- polygonContainsRect (2D)
+- calcPolygonArea (2D)
+
+## Ray test
+
+- rayIntersectsPlane (3D)
+- rayIntersectsTriangle (3D)
+- rayIntersectsSphere (3D)
+- rayIntersectsBox (3D)
+
+## Vertex interpolation
+
+- calcVertexInterpolation (3D)
+  Calculate the interpolated vertex coordinate on a specified point of a given 3D triangle with vertices coordinates.
