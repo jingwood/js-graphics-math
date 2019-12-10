@@ -5,6 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
+import { roundDigits } from "./utility.js";
+
 export class Vec4 {
 	constructor(x, y, z, w) {
 		
@@ -161,7 +163,6 @@ export class Vec4 {
 	}
 
 	toArrayDigits(digits) {
-		var roundDigits = Tarumae.Utility.NumberExtension.roundDigits;
 		return [roundDigits(this.x, digits), roundDigits(this.y, digits),
 		roundDigits(this.z, digits), roundDigits(this.w, digits)];
 	}

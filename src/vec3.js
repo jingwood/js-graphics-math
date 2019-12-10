@@ -192,7 +192,6 @@ export class Vec3 {
 	}
 	
 	toArrayDigits(digits) {
-		var roundDigits = Tarumae.Utility.NumberExtension.roundDigits;
 		return [roundDigits(this.x, digits), roundDigits(this.y, digits), roundDigits(this.z, digits)];
 	}
 	
@@ -201,10 +200,8 @@ export class Vec3 {
 	}
 		
 	toString() {
-		var toStringDigits = Tarumae.Utility.NumberExtension.toStringWithDigits;
-	
-		return "[" + toStringDigits(this.x) + ", " + toStringDigits(this.y) + ", "
-			+ toStringDigits(this.z) + "]";
+		return "[" + toStringWithDigits(this.x) + ", " + toStringWithDigits(this.y) + ", "
+			+ toStringWithDigits(this.z) + "]";
 	}
 
 	static add(v1, v2) {

@@ -5,6 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
+import { toStringWithDigits } from "./utility";
+
 export class Color3 {
 	constructor(r, g, b) {
 		switch (arguments.length) {
@@ -100,10 +102,8 @@ export class Color3 {
 	}
 	
 	toString() {
-		var toStringDigits = Tarumae.Utility.NumberExtension.toStringWithDigits;
-	
-		return "[" + toStringDigits(this.r) + ", " + toStringDigits(this.g) + ", "
-			+ toStringDigits(this.b) + "]";
+		return "[" + toStringWithDigits(this.r) + ", " + toStringWithDigits(this.g) + ", "
+			+ toStringWithDigits(this.b) + "]";
 	}
 
 	static fromArray(arr) {
