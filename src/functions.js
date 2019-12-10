@@ -322,7 +322,7 @@ export class MathFunctions {
   static pointToNearestPolygon(p, polygon, mindist) {
     let ret = {
       dist: Infinity,
-      line: new Tarumae.LineSegment2D(),
+      line: new LineSegment2D(),
       lineIndex: undefined,
     };
 
@@ -502,7 +502,7 @@ export class MathFunctions {
       const px1 = polygon[i][0], py1 = polygon[i][1],
         px2 = polygon[i + 1][0], py2 = polygon[i + 1][1];
       
-      if (this.lineIntersectsRect(new Tarumae.LineSegment2D(px1, py1, px2, py2), rect)) {
+      if (this.lineIntersectsRect(new LineSegment2D(px1, py1, px2, py2), rect)) {
         return true;
       }
     }
@@ -731,7 +731,7 @@ export class MathFunctions {
   //             RGFloat x = (RGFloat)Math.Sin(radians) * ww;
   //             RGFloat y = (RGFloat)Math.Cos(radians) * hh;
 
-  //             return new Tarumae.Point(rect.X + ww + x, rect.Y + hh - y);
+  //             return new Vec2(rect.X + ww + x, rect.Y + hh - y);
   //         }
 }
 
