@@ -21,7 +21,7 @@ export class PointBPNode {
 	}
 
 	build(points) {
-		var bbox = BoundingBox3D.fromPoints(points);
+		var bbox = BBox3D.fromPoints(points);
 		
 		var lbox = new BoundingBox(), rbox = new BoundingBox();
 		var lpoints = new Array(), rpoints = new Array();

@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { Vec3 } from "./vec3"
-import { BoundingBox3D } from "./bbox3"
+import { BBox3D } from "./bbox3"
 
 export class KDNode3D {
   constructor() {
@@ -57,14 +57,14 @@ export class KDNode3D {
     const splitPoint = bbox.min.add(bbox.size.mul(0.5));
 
     if (bbox.size.x > bbox.size.y && bbox.size.x > bbox.size.z) {
-      lbox = new BoundingBox3D(bbox.min, new Vec3(splitPoint.x, bbox.max.y, bbox.max.z));
-      rbox = new BoundingBox3D(new Vec3(splitPoint.x, bbox.min.y, bbox.min.z), bbox.max);
+      lbox = new BBox3D(bbox.min, new Vec3(splitPoint.x, bbox.max.y, bbox.max.z));
+      rbox = new BBox3D(new Vec3(splitPoint.x, bbox.min.y, bbox.min.z), bbox.max);
     } else if (bbox.size.y > bbox.size.x && bbox.size.y > bbox.size.z) {
-      lbox = new BoundingBox3D(bbox.min, new Vec3(bbox.max.x, splitPoint.y, bbox.max.z));
-      rbox = new BoundingBox3D(new Vec3(bbox.min.x, splitPoint.y, bbox.min.z), bbox.max);
+      lbox = new BBox3D(bbox.min, new Vec3(bbox.max.x, splitPoint.y, bbox.max.z));
+      rbox = new BBox3D(new Vec3(bbox.min.x, splitPoint.y, bbox.min.z), bbox.max);
     } else {
-      lbox = new BoundingBox3D(bbox.min, new Vec3(bbox.max.x, bbox.max.y, splitPoint.z));
-      rbox = new BoundingBox3D(new Vec3(bbox.min.x, bbox.min.y, splitPoint.z), bbox.max);
+      lbox = new BBox3D(bbox.min, new Vec3(bbox.max.x, bbox.max.y, splitPoint.z));
+      rbox = new BBox3D(new Vec3(bbox.min.x, bbox.min.y, splitPoint.z), bbox.max);
     }
 
     for (let i = 0; i < itemCount; i++/*, pitem++*/) {
@@ -105,7 +105,7 @@ export class KDNode3D {
       } else if (left == NULL && right != NULL) {
         this.bbox = right.bbox;
       } else {
-        this.bbox = new BoundingBox3D(left.bbox.min, right.bbox.max);
+        this.bbox = new BBox3D(left.bbox.min, right.bbox.max);
       }
     }
   }
