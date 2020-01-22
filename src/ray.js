@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "vec3";
+import { Vec3 } from "./vec3.js";
 
 export class Ray {
 	constructor(origin, dir) {

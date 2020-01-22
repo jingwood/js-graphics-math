@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { roundDigits } from "./utility.js";
+import { Vec3 } from "./vec3.js";
 
 export class Vec4 {
 	constructor(x, y, z, w) {

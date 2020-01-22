@@ -5,6 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
+import { Color3 } from "./color3.js";
+
 export class Color4 {
 	constructor(r, g, b, a) {
 		switch (arguments.length) {

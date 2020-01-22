@@ -5,6 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
+import { Vec3 } from "./vec3.js";
+
 class SpaceTreeNode {
   constructor(origin, size) {
     if (typeof origin === "undefined") {

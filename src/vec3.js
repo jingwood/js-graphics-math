@@ -9,7 +9,7 @@ import { Matrix4 } from "./matrix4.js";
 import { Vec2 } from "./vec2.js";
 
 export class Vec3 {
-	constructor() {		
+	constructor() {
 		this.x = 0; this.y = 0; this.z = 0;
 		this.set(...arguments);
 	}

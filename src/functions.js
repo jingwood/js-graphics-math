@@ -5,6 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
+import { Vec2 } from "./vec2.js"
 import { Vec3 } from "./vec3.js"
 import { Vec4 } from "./vec4.js"
 
