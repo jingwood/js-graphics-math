@@ -7,6 +7,7 @@
 
 import { Matrix4 } from "./matrix4.js";
 import { Vec2 } from "./vec2.js";
+import { toStringWithDigits, roundDigits } from "./utility.js";
 
 export class Vec3 {
 	constructor() {

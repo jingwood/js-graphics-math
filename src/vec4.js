@@ -5,8 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { roundDigits } from "./utility.js";
 import { Vec3 } from "./vec3.js";
+import { roundDigits } from "./utility.js";
 
 export class Vec4 {
 	constructor(x, y, z, w) {

@@ -219,10 +219,10 @@ export class MathFunctions {
   }
 
   static distancePointToLineSegment2D(p, l) {
-    return this.distancePointToLineSegment2DXY(p, l.x1, l.y1, l.x2, l.y2);
+    return this.distancePointToLineSegment2DXYXY(p, l.x1, l.y1, l.x2, l.y2);
   }
 
-  static distancePointToLineSegment2DXY(p, lp1, lp2) {
+  static distancePointToLineSegment2DP1P2(p, lp1, lp2) {
     return this.distancePointToLineSegment2DXYXY(p, lp1.x, lp1.y, lp2.x, lp2.y);
   }
 
@@ -262,10 +262,10 @@ export class MathFunctions {
   }
 
   static nearestPointToLineSegment2D(p, l) {
-    return this.nearestPointToLineSegment2DXY(p, l.x1, l.y1, l.x2, l.y2);
+    return this.nearestPointToLineSegment2DXYXY(p, l.x1, l.y1, l.x2, l.y2);
   }
   
-  static nearestPointToLineSegment2DXY(p, lp1, lp2) {
+  static nearestPointToLineSegment2DP1P2(p, lp1, lp2) {
     return this.nearestPointToLineSegment2DXYXY(p, lp1.x, lp1.y, lp2.x, lp2.y);
   }
 
@@ -320,20 +320,20 @@ export class MathFunctions {
     return Math.min(de1, de2, de3, de4);
   }
 
-  static pointToNearestPolygon(p, polygon, mindist) {
+  static pointToNearestPolygon(p, polygon /*, mindist = undefined */) {
     let ret = {
       dist: Infinity,
-      line: new LineSegment2D(),
+      line: {},
       lineIndex: undefined,
     };
 
     for (let i = 0, j = 1; i < polygon.length; i++ , j++) {
       if (j >= polygon.length) j = 0;
       
-      const px1 = polygon[i][0], py1 = polygon[i][1],
-        px2 = polygon[j][0], py2 = polygon[j][1];
+      const px1 = polygon[i].x, py1 = polygon[i].y,
+        px2 = polygon[j].x, py2 = polygon[j].y;
       
-      const r2 = this.nearestPointToLineSegment2DXY(p, px1, py1, px2, py2);
+      const r2 = this.nearestPointToLineSegment2DXYXY(p, px1, py1, px2, py2);
       if (/*(!mindist || r2.dist < mindist) &&*/ r2.dist < ret.dist) {
         ret.dist = r2.dist;
         ret.line.x1 = px1; ret.line.y1 = py1;
