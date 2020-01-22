@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "npx babel src -d dist",
-    "test": "node test/test_vec2.js",
+    "test": "node test/test_all.js",
     "serve": "webpack-dev-server --config webpack.dev.js --mode development"
   },
   "keywords": [],
