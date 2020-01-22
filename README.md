@@ -1,3 +1,5 @@
+![npm](https://img.shields.io/npm/v/@jingwood/graphics-math.svg)
+
 # js-graphics-math
 
 Math library for JavaScript 2D/3D graphics rendering.
@@ -10,7 +12,7 @@ The following classes available under [src](src) folder.
 - [Vector3](src/vec3.js)
 - [Matrix3](src/matrix3.js)
 - [Matrix4](src/matrix4.js)
-- BoundingBox 2D
+- [BoundingBox 2D](src/bbox2.js)
 - [BoundingBox 3D](src/bbox3.js)
 - KDTree for 2D points
 - KDTree for 3D points
@@ -51,8 +53,8 @@ Functions below available at [src/functions.js](src/functions.js).
 
 ## Containing test
 
-- rectContainsPoint (2D/3D)
-- triangleContainsPoint (3D)
+- rectContainsPoint (2D)
+- triangleContainsPoint (2D)
 - polygonContainsPoint (2D)
 - polygonContainsRect (2D)
 - calcPolygonArea (2D)
@@ -68,3 +70,11 @@ Functions below available at [src/functions.js](src/functions.js).
 
 - **calcVertexInterpolation (3D)**
   Calculate the interpolated vertex coordinate on a specified point of a 3D triangle with vertex coordinates.
+
+# Software uses this library
+
+- Showroom WebGL engine (https://github.com/bulbinc/tarumae-viewer)
+
+# License
+
+MIT © Jingwood, unvell.com, all rights reserved.
