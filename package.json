@@ -1,23 +1,22 @@
 {
   "name": "@jingwood/graphics-math",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Math library for JavaScript 2D/3D graphics rendering.",
-  "main": "dist/mathlib.js",
+  "main": "dist/graphics-math.js",
   "files": [
     "/dist"
   ],
   "scripts": {
-    "build": "webpack --config webpack.prod.js --mode production",
+    "build": "npx babel src -d dist",
     "test": "node test/test_vec2.js",
-    "serve": "webpack-dev-server --config webpack.dev.js --mode development",
-    "pub": "npx babel src -d dist"
+    "serve": "webpack-dev-server --config webpack.dev.js --mode development"
   },
   "keywords": [],
   "author": "Jingwood",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/jingwood/js-mathlib.git"
+    "url": "git+ssh://git@github.com/jingwood/js-graphics-math.git"
   },
   "type": "module",
   "dependencies": {
@@ -44,7 +43,7 @@
     "ws": "^7.0.1"
   },
   "bugs": {
-    "url": "https://github.com/jingwood/js-mathlib/issues"
+    "url": "https://github.com/jingwood/js-graphics-math/issues"
   },
-  "homepage": "https://github.com/jingwood/js-mathlib"
+  "homepage": "https://github.com/jingwood/js-graphics-math"
 }
