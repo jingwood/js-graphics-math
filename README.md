@@ -73,12 +73,13 @@ Functions below available at [src/functions.js](src/functions.js).
 
 # Software uses this library
 
-- Showroom WebGL engine (https://github.com/bulbinc/tarumae-viewer)
+- tarumae-viewer - Optimized WebGL engine for Showcase application<br/>
+  [https://github.com/bulbinc/tarumae-viewer](https://github.com/bulbinc/tarumae-viewer)
 
 # Related Libraries
 
 - cpp-graphics-module (A C++ version of this library)<br/>
-  https://github.com/jingwood/cpp-graphics-module
+  [https://github.com/jingwood/cpp-graphics-module](https://github.com/jingwood/cpp-graphics-module)
 
 # License
 
