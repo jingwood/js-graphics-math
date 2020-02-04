@@ -47,17 +47,38 @@ export class BBox2D {
     return { width: this.width, height: this.height };
 	}
 
+	set size({ width, height }) {
+		this.width = width;
+		this.height = height;
+	}
+
 	get width() {
 		return this.max.x - this.min.x;
+	}
+
+	set width(v) {
+		this.max.x = this.min.x + v;
 	}
 
 	get height() {
 		return this.max.y - this.min.y;
 	}
 
+	set height(v) {
+		this.max.y = this.min.y + v;
+	}
+
 	get origin() {
 		const size = this.size;
 		return new Vec2(this.min.x + size.width * 0.5, this.min.y + size.height * 0.5);
+	}
+
+	set origin({ x, y }) {
+		const { width, height } = this.size;
+		const hw = width * 0.5, hh = height * 0.5;
+		
+		this.min.x = x - hw; this.max.x = x + hw;
+		this.min.y = y - hh; this.max.y = y + hh;
 	}
 
 	get rect() {
@@ -164,5 +185,23 @@ export class BBox2D {
 		const bbox = new BBox2D();
 		bbox.updateFromPolygon(p);
 		return bbox;
+	}
+
+	transform(matrix) {
+		return BBox2D.transform(this, matrix);
+	}
+
+	static transform(bbox, matrix) {
+		const v1 = bbox.min.mulMat(matrix);
+		const v2 = new Vec2(bbox.max.x, bbox.min.y).mulMat(matrix);
+		const v3 = new Vec2(bbox.min.x, bbox.max.y).mulMat(matrix);
+		const v4 = bbox.max.mulMat(matrix);
+
+		const minx = Math.min(v1.x, v2.x, v3.x, v4.x);
+		const miny = Math.min(v1.y, v2.y, v3.y, v4.y);
+		const maxx = Math.max(v1.x, v2.x, v3.x, v4.x);
+		const maxy = Math.max(v1.y, v2.y, v3.y, v4.y);
+
+		return new BBox2D(new Vec2(minx, miny), new Vec2(maxx, maxy));
 	}
 }

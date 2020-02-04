@@ -204,7 +204,7 @@ export class MathFunctions {
   }
 
   static distancePointToLine2D(p, l) {
-    return MathFunctions.distancePointToLine2DXY(p, l.x1, l.y1, l.x2, l.y2);
+    return MathFunctions.distancePointToLine2DXYXY(p, l.x1, l.y1, l.x2, l.y2);
   }
   
   static distancePointToLine2DXY(p, lp1, lp2) {
