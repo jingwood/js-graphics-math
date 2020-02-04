@@ -94,6 +94,33 @@ export class Matrix3 {
 		return this;
 	}
 
+	inverse() {
+		const detM
+			= this.a1 * this.b2 * this.c3 + this.b1 * this.c2 * this.a3 + this.c1 * this.a2 * this.b3
+			- this.c1 * this.b2 * this.a3 - this.b1 * this.a2 * this.c3 - this.a1 * this.c2 * this.b3;
+		
+		if (detM === 0) return this;
+
+		const ka1 = this.b2 * this.c3 - this.c2 * this.b3;
+		const ka2 = this.a2 * this.c3 - this.c2 * this.a3;
+		const ka3 = this.a2 * this.b3 - this.b2 * this.a3;
+
+		const kb1 = this.b1 * this.c3 - this.c1 * this.b3;
+		const kb2 = this.a1 * this.c3 - this.c1 * this.a3;
+		const kb3 = this.a1 * this.b3 - this.b1 * this.a3;
+
+		const kc1 = this.b1 * this.c2 - this.c1 * this.b2;
+		const kc2 = this.a1 * this.c2 - this.c1 * this.a2;
+		const kc3 = this.a1 * this.b2 - this.b1 * this.a2;
+
+		const q = 1 / detM, m = new Matrix3();
+		m.a1 = q * ka1; m.b1 = -q * kb1; m.c1 = q * kc1;
+		m.a2 = -q * ka2; m.b2 = q * kb2; m.c2 = -q * kc2;
+		m.a3 = q * ka3, m.b3 = -q * kb3, m.c3 = q * kc3;
+		
+		return m;
+	}
+
 	transpose() {
 		var a2 = this.b1;
 		var a3 = this.c1;
@@ -152,9 +179,9 @@ export class Matrix3 {
 	}
 
 	equals(m2) {
-		return this.a1 == m2.a1 && this.b1 == m2.b1 && this.c1 == m2.c1
-			&& this.a2 == m2.a2 && this.b2 == m2.b2 && this.c2 == m2.c2
-			&& this.a3 == m2.a3 && this.b3 == m2.b3 && this.c3 == m2.c3;
+		return this.a1 === m2.a1 && this.b1 === m2.b1 && this.c1 === m2.c1
+			&& this.a2 === m2.a2 && this.b2 === m2.b2 && this.c2 === m2.c2
+			&& this.a3 === m2.a3 && this.b3 === m2.b3 && this.c3 === m2.c3;
 	}
 
 	toArray() {
