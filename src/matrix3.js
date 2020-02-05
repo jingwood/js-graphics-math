@@ -67,13 +67,13 @@ export class Matrix3 {
 		return m;
 	}
 
-	static makeRotation(angle, x, y) {
+	static makeRotation(angle, x = 0, y = 0) {
 		const m = new Matrix3();
 		const d = angle * Math.PI / 180;
 		const sin = Math.sin(d), cos = Math.cos(d);
 		m.a1 = cos, m.b1 = sin, m.c1 = 0;
 		m.a2 = -sin, m.b2 = cos, m.c2 = 0;
-		m.a3 = x || 0, m.b3 = y || 0, m.c3 = 1;
+		m.a3 = x, m.b3 = y, m.c3 = 1;
 		return m;
 	}
 
@@ -122,12 +122,9 @@ export class Matrix3 {
 	}
 
 	transpose() {
-		var a2 = this.b1;
-		var a3 = this.c1;
-		var b1 = this.a2;
-		var b3 = this.c2;
-		var c1 = this.a3;
-		var c2 = this.b3;
+		const a2 = this.b1, a3 = this.c1;
+		const b1 = this.a2, b3 = this.c2;
+		const c1 = this.a3, c2 = this.b3;
 
 		this.b1 = b1; this.c1 = c1;
 		this.a2 = a2; this.c2 = c2;
@@ -137,20 +134,17 @@ export class Matrix3 {
 	}
 
 	mul(m2) {
-		var m1 = this;
-		var m3 = new Matrix3();
+		const m3 = new Matrix3();
 
-		m3.a1 = m1.a1 * m2.a1 + m1.b1 * m2.a2 + m1.c1 * m2.a3;
-		m3.b1 = m1.a1 * m2.b1 + m1.b1 * m2.b2 + m1.c1 * m2.b3;
-		m3.c1 = m1.a1 * m2.c1 + m1.b1 * m2.c2 + m1.c1 * m2.c3;
-
-		m3.a2 = m1.a2 * m2.a1 + m1.b2 * m2.a2 + m1.c2 * m2.a3;
-		m3.b2 = m1.a2 * m2.b1 + m1.b2 * m2.b2 + m1.c2 * m2.b3;
-		m3.c2 = m1.a2 * m2.c1 + m1.b2 * m2.c2 + m1.c2 * m2.c3;
-
-		m3.a3 = m1.a3 * m2.a1 + m1.b3 * m2.a2 + m1.c3 * m2.a3;
-		m3.b3 = m1.a3 * m2.b1 + m1.b3 * m2.b2 + m1.c3 * m2.b3;
-		m3.c3 = m1.a3 * m2.c1 + m1.b3 * m2.c2 + m1.c3 * m2.c3;
+		m3.a1 = this.a1 * m2.a1 + this.b1 * m2.a2 + this.c1 * m2.a3;
+		m3.b1 = this.a1 * m2.b1 + this.b1 * m2.b2 + this.c1 * m2.b3;
+		m3.c1 = this.a1 * m2.c1 + this.b1 * m2.c2 + this.c1 * m2.c3;
+		m3.a2 = this.a2 * m2.a1 + this.b2 * m2.a2 + this.c2 * m2.a3;
+		m3.b2 = this.a2 * m2.b1 + this.b2 * m2.b2 + this.c2 * m2.b3;
+		m3.c2 = this.a2 * m2.c1 + this.b2 * m2.c2 + this.c2 * m2.c3;
+		m3.a3 = this.a3 * m2.a1 + this.b3 * m2.a2 + this.c3 * m2.a3;
+		m3.b3 = this.a3 * m2.b1 + this.b3 * m2.b2 + this.c3 * m2.b3;
+		m3.c3 = this.a3 * m2.c1 + this.b3 * m2.c2 + this.c3 * m2.c3;
 
 		return m3;
 	}
