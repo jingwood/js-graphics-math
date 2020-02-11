@@ -17,11 +17,11 @@ export class PointBPNode {
 			} else {
 				this.points.concat(inputPoints);
 			}
-		}	
+		}
 	}
 
 	build(points) {
-		var bbox = BBox3D.fromPoints(points);
+		var bbox = BoundingBox3D.fromPoints(points);
 		
 		var lbox = new BoundingBox(), rbox = new BoundingBox();
 		var lpoints = new Array(), rpoints = new Array();

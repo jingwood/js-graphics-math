@@ -7,7 +7,7 @@
 
 import { Vec2 } from "./vec2.js"
 
-export class BBox2D {
+export class BoundingBox2D {
 	constructor() {
 		this.set(...arguments);
 	}
@@ -21,7 +21,7 @@ export class BBox2D {
 			
 			case 1:
 				const bbox2 = arguments[0];
-				if (bbox2 instanceof BBox2D) {
+				if (bbox2 instanceof BoundingBox2D) {
 					this.set(bbox2.min, bbox2.max);
 				}
 				break;
@@ -39,7 +39,7 @@ export class BBox2D {
 				break;
 			
 			default:
-				throw new Error("BBox2D: unsupported arguments to set");
+				throw new Error("BoundingBox2D: unsupported arguments to set");
 		}
 	}
 
@@ -158,37 +158,37 @@ export class BBox2D {
 	}
 
 	static fromTwoPoints(v1, v2) {
-		const bbox = new BBox2D();
+		const bbox = new BoundingBox2D();
 		bbox.updateFromTwoPoints(v1, v2);
 		return bbox;
 	}
 
 	static from4Points(p1, p2, p3, p4) {
-		const bbox = new BBox2D();
+		const bbox = new BoundingBox2D();
 		bbox.updateFrom4Points(p1, p2, p3, p4);
 		return bbox;
 	}
 
 	static fromTwoBoundingBoxes(b1, b2) {
-		const bbox = new BBox2D();
+		const bbox = new BoundingBox2D();
 		bbox.updateFromTwoBoundingBoxes(b1, b2);
 		return bbox;
 	}
 
 	static fromPoints(vertices) {
-		const bbox = new BBox2D();
+		const bbox = new BoundingBox2D();
 		bbox.updateFromPoints(vertices);
 		return bbox;
 	}
 
 	static fromPolygon(p) {
-		const bbox = new BBox2D();
+		const bbox = new BoundingBox2D();
 		bbox.updateFromPolygon(p);
 		return bbox;
 	}
 
 	transform(matrix) {
-		return BBox2D.transform(this, matrix);
+		return BoundingBox2D.transform(this, matrix);
 	}
 
 	static transform(bbox, matrix) {
@@ -202,6 +202,6 @@ export class BBox2D {
 		const maxx = Math.max(v1.x, v2.x, v3.x, v4.x);
 		const maxy = Math.max(v1.y, v2.y, v3.y, v4.y);
 
-		return new BBox2D(new Vec2(minx, miny), new Vec2(maxx, maxy));
+		return new BoundingBox2D(new Vec2(minx, miny), new Vec2(maxx, maxy));
 	}
 }

@@ -5,11 +5,13 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-export { BBox2D } from "./bbox2.js";
-export { BBox3D } from "./bbox3.js";
+export { BoundingBox2D } from "./bbox2.js";
+export { BoundingBox3D } from "./bbox3.js";
 export { Color3 } from "./color3.js";
 export { Color4 } from "./color4.js";
 export { MathFunctions } from "./functions.js";
+export { MathFunctions2 } from "./functions2.js";
+export { MathFunctions3 } from "./functions3.js";
 export { Matrix3 } from "./matrix3.js";
 export { Matrix4 } from "./matrix4.js";
 export { Ray } from "./ray.js";

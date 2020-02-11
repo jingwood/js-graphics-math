@@ -8,7 +8,7 @@
 import { Vec3 } from "./vec3.js";
 import { Vec4 } from "./vec4.js";
 
-export class BBox3D {
+export class BoundingBox3D {
 	constructor() {
 		this.min = new Vec3();
 		this.max = new Vec3();
@@ -139,7 +139,7 @@ export class BBox3D {
 	}
 
 	static fromPoints(points) {
-		var bbox = new BBox3D();
+		var bbox = new BoundingBox3D();
 
 		if (points.length <= 0) {
 			return bbox;
@@ -159,7 +159,7 @@ export class BBox3D {
 	}
 	
 	static fromVertexArray(vertices, start, count) {
-		const bbox = new BBox3D();
+		const bbox = new BoundingBox3D();
 		
 		if (count <= 0) {
 			return bbox;
