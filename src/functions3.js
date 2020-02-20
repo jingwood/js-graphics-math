@@ -23,12 +23,12 @@ export class MathFunctions3 {
   }
 
   static eulerAnglesFromVectors(v1, v2) {
-    var l = v1 - v2;
+    const l = v1 - v2;
     
-    var padj = sqrt(pow(l.x, 2) + pow(l.z, 2));
+    const padj = sqrt(l.x * l.x + l.z * l.z);
     
-    var x = atan2f(l.x, l.z);
-    var y = 90 - atan2(padj, l.y);
+    const x = atan2f(l.x, l.z);
+    const y = 90 - atan2(padj, l.y);
 
     return { x: MathFunctions.degreeToAngle(x), y: MathFunctions.degreeToAngle(y) };
   }

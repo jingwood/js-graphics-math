@@ -27,23 +27,23 @@ export class MathFunctions2 {
   }
 
   static distancePointToLine(p, l) {
-    return MathFunctions2.distancePointToLineXYXY(p, l.x1, l.y1, l.x2, l.y2);
+    return MathFunctions2.distancePointToLineXYXY(p.x, p.y, l.start.x, l.start.y, l.end.x, l.end.y);
   }
   
-  static distancePointToLineXY(p, lp1, lp2) {
-    return MathFunctions2.distancePointToLineXYXY(p, lp1.x, lp1.y, lp2.x, lp2.y);
+  static distancePointToLine2(p, lp1, lp2) {
+    return MathFunctions2.distancePointToLineXYXY(p.x, p.y, lp1.x, lp1.y, lp2.x, lp2.y);
   }
 
-  static distancePointToLineXYXY(p, x1, y1, x2, y2) {
+  static distancePointToLineXYXY(px, py, x1, y1, x2, y2) {
     const a = y2 - y1, b = x1 - x2, c = x2 * y1 - x1 * y2;
-    return Math.abs(a * p.x + b * p.y + c) / Math.sqrt(a * a + b * b);
+    return Math.abs(a * px + b * py + c) / Math.sqrt(a * a + b * b);
   }
 
   static distancePointToLineSegment(p, l) {
     return MathFunctions2.distancePointToLineSegmentXYXY(p.x, p.y, l.x1, l.y1, l.x2, l.y2);
   }
 
-  static distancePointToLineSegmentL1L2(p, lp1, lp2) {
+  static distancePointToLineSegment2(p, lp1, lp2) {
     return MathFunctions2.distancePointToLineSegmentXYXY(p.x, p.y, lp1.x, lp1.y, lp2.x, lp2.y);
   }
 
@@ -151,10 +151,9 @@ export class MathFunctions2 {
     for (let i = 0, j = 1; i < polygon.length; i++ , j++) {
       if (j >= polygon.length) j = 0;
       
-      const px1 = polygon[i].x, py1 = polygon[i].y,
-        px2 = polygon[j].x, py2 = polygon[j].y;
+      const px1 = polygon[i].x, py1 = polygon[i].y, px2 = polygon[j].x, py2 = polygon[j].y;
       
-      const r2 = MathFunctions2.nearestPointToLineSegmentXYXY(p, px1, py1, px2, py2);
+      const r2 = MathFunctions2.nearestPointToLineSegmentXYXY(p.x, p.y, px1, py1, px2, py2);
       if (/*(!mindist || r2.dist < mindist) &&*/ r2.dist < ret.dist) {
         ret.dist = r2.dist;
         ret.line.x1 = px1; ret.line.y1 = py1;
@@ -268,10 +267,10 @@ export class MathFunctions2 {
 
   static rectIntersectsRect(r1, r2) {
     const
-      r1x1 = r1.x, r1x2 = r1.right,
-      r1y1 = r1.y, r1y2 = r1.bottom,
-      r2x1 = r2.x, r2x2 = r2.right,
-      r2y1 = r2.y, r2y2 = r2.bottom;
+      r1x1 = r1.x, r1x2 = r1.x + r1.width,
+      r1y1 = r1.y, r1y2 = r1.y + r1.height,
+      r2x1 = r2.x, r2x2 = r2.x + r2.width,
+      r2y1 = r2.y, r2y2 = r2.y + r2.height;
 
     if (r1x2 < r2x1) return false;
     if (r1x1 > r2x2) return false;
@@ -284,8 +283,8 @@ export class MathFunctions2 {
   static rectIntersectsPolygon(rect, polygon) {
 
     for (let i = 0; i < polygon.length - 1; i++) {
-      const px1 = polygon[i][0], py1 = polygon[i][1],
-        px2 = polygon[i + 1][0], py2 = polygon[i + 1][1];
+      const px1 = polygon[i].x, py1 = polygon[i].y,
+        px2 = polygon[i + 1].x, py2 = polygon[i + 1].y;
       
       if (this.lineIntersectsRect(new LineSegment2D(px1, py1, px2, py2), rect)) {
         return true;
@@ -295,13 +294,13 @@ export class MathFunctions2 {
     return false;
   }
   
-  static lineIntersectsLine2D(l1, l2) {
-    return this.lineIntersectsLine2DXY(
+  static lineIntersectsLine(l1, l2) {
+    return this.lineIntersectsLineXY(
       l1.start.x, l1.start.y, l1.end.x, l1.end.y,
       l2.start.x, l2.start.y, l2.end.x, l2.end.y);
   }
 
-  static lineIntersectsLine2DXY(a, b, c, d, p, q, r, s) {
+  static lineIntersectsLineXY(a, b, c, d, p, q, r, s) {
     // source: https://stackoverflow.com/questions/9043805/test-if-two-lines-intersect-javascript-function
 
     const det = (c - a) * (s - q) - (r - p) * (d - b);
@@ -315,7 +314,7 @@ export class MathFunctions2 {
     }
   }
   
-  static _unused_lineIntersectsLine2DXY(line1StartX, line1StartY, line1EndX, line1EndY,
+  static _unused_lineIntersectsLineXY(line1StartX, line1StartY, line1EndX, line1EndY,
     line2StartX, line2StartY, line2EndX, line2EndY) {
     // original source: http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
     
