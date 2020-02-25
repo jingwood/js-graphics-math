@@ -1,5 +1,5 @@
-import { Vec2 } from "../src/vec2.js";
 import { testSuite } from "./framework.js";
+import { Vec2 } from "../src/vec2.js";
 
 testSuite("Vec2")
   .test("add", function(t) {
@@ -37,5 +37,12 @@ testSuite("Vec2")
     const v2 = new Vec2(2, 5);
     
     t.assert(Vec2.div(v1, v2), new Vec2(0.5, 0.4));
+  })
+  .test("length, normalize", function(t) {
+    const v1 = new Vec2(3, 4);
+    t.assert(v1.length(), 5);
+    const n1 = v1.normalize();
+    t.approxiAssert(n1.x, 3 / 5);
+    t.approxiAssert(n1.y, 4 / 5);
   })
   .stats();

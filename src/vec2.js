@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { toStringWithDigits } from "./utility.js";
+import { approxiEquals } from "./functions.js";
 
 export class Vec2 {
 	constructor() {
@@ -50,25 +51,16 @@ export class Vec2 {
 		this.y *= scaleY;
 	}
 
-	mul(sx, sy) {
-		switch (arguments.length) {
-			case 1:
-				if (typeof sx === "object") {
-					return new Vec2(this.x * sx.x, this.y * sx.y);
-				} else {
-					return new Vec2(this.x * sx, this.y * sx);
-				}
-
-			case 2:
-				return new Vec2(this.x * sx, this.y * sy);
-		}
+	mul(v2) {
+		return Vec2.mul(this, v2);
 	}
 
 	static mul(v1, v2) {
-		if (!(v1 instanceof Vec2))
-			return Vec2.NaN;
-		
-		return v1.mul(v2);
+		if (typeof v2 === "object") {
+			return new Vec2(v1.x * v2.x, v1.y * v2.y);
+		} else {
+			return new Vec2(v1.x * v2, v1.y * v2);
+		}
 	}
 
 	mulMat(m) {
@@ -77,42 +69,49 @@ export class Vec2 {
 			this.x * m.b1 + this.y * m.b2 + m.b3);
 	}
 
-	div(dx, dy) {
-		switch (arguments.length) {
-			case 1:
-				if (typeof dx === "object") {
-					return new Vec2(this.x / dx.x, this.y / dx.y);
-				} else {
-					return new Vec2(this.x / dx, this.y / dx);
-				}
-				
-			case 2:
-				return new Vec2(this.x / dx, this.y / dy);
-		}
+	div(v2) {
+		return Vec2.div(this, v2);
 	}
 
 	static div(v1, v2) { 
-		if (!(v1 instanceof Vec2))
-			return Vec2.NaN;
-	
-		return v1.div(v2);
+		if (typeof v2 === "object") {
+			return new Vec2(v1.x / v2.x, v1.y / v2.y);
+		} else {
+			return new Vec2(v1.x / v2, v1.y / v2);
+		}
 	}
 
 	neg() {
-		return new Vec2(-this.x, -this.y);
+		return Vec2.neg(this);
 	}
 
-	length() {
-		return Math.sqrt(this.x * this.x + this.y * this.y);
+	static neg(v) {
+		return new Vec2(-v.x, -v.y);
 	}
 
 	get magnitude() {
-		return Math.sqrt(this.x * this.x + this.y * this.y);
+		return Vec2.length(this);
+	}
+
+	static magnitude(v) {
+		return Vec2.length(v);
+	}
+
+	length() {
+		return Vec2.length(this);
+	}
+
+	static length(v) {
+		return Math.sqrt(v.x * v.x + v.y * v.y);
 	}
 
 	normalize() {
-		const delta = 1 / this.length();
-		return new Vec2(this.x * delta, this.y * delta);
+		return Vec2.normalize(this);
+	}
+
+	static normalize(v) {
+		const delta = 1 / v.length();
+		return new Vec2(v.x * delta, v.y * delta);
 	}
 
 	clone() {
@@ -132,7 +131,7 @@ export class Vec2 {
 	}
 
 	approxiEquals(v2) {
-		return Math.abs(this.x - v2.x) < 0.00001 && Math.abs(this.y - v2.y) < 0.00001;
+		return approxiEquals(this.x, v2.x) && approxiEquals(this.y, v2.y);
 	}
 
 	toString() {

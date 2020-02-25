@@ -1,3 +1,4 @@
+import { approxiEquals } from "../src/functions.js";
 
 function compare(a, b) {
   if (typeof a.equals === "function") {
@@ -49,13 +50,19 @@ class _TestSuite {
     console.log(` done ${this.tested} tested, ${this.successed} successed, ${this.failed} failed.\n`);
   }
 
-  assert(ret, expect = true) {
-    const res = compare(ret, expect);
-  
+  assertTrue(res) {
     if (!res) {
       this._currentTestSuccess = false;
       console.log(` - '${this._currentTestName}' failed, expect ${expect} but ${ret}`);
     }
+  }
+
+  assert(ret, expect = true) {
+    return this.assertTrue(compare(ret, expect));
+  }
+
+  approxiAssert(ret, expect = true) {
+    return this.assertTrue(approxiEquals(ret, expect));
   }
 }
 

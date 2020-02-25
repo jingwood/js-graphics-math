@@ -8,6 +8,7 @@
 import { Matrix4 } from "./matrix4.js";
 import { Vec2 } from "./vec2.js";
 import { toStringWithDigits, roundDigits } from "./utility.js";
+import { approxiEquals } from "./functions.js";
 
 export class Vec3 {
 	constructor() {
@@ -71,14 +72,18 @@ export class Vec3 {
 				return false;
 	
 			case 1:
-				var obj = arguments[0];
-				return (typeof obj === "object")
-					&& Math.abs(this.x - obj.x) < 0.00001 && Math.abs(this.y - obj.y) < 0.00001
-					&& Math.abs(this.z - obj.z) < 0.00001;
+				{
+					const obj = arguments[0];
+					return (typeof obj === "object")
+						&& approxiEquals(this.x, obj.x)
+						&& approxiEquals(this.y, obj.y)
+						&& approxiEquals(this.z, obj.z);
+				}
 	
 			case 3:
-				return Math.abs(this.x - arguments[0]) < 0.00001 && Math.abs(this.y - arguments[1]) < 0.00001
-					&& Math.abs(this.z - arguments[2]) < 0.00001;
+				return approxiEquals(this.x, arguments[0])
+					&& approxiEquals(this.y, arguments[1])
+					&& approxiEquals(this.z, arguments[2]);
 		}
 	}
 	

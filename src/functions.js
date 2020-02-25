@@ -10,15 +10,20 @@ import { Vec3 } from "./vec3.js"
 import { Vec4 } from "./vec4.js"
 import { MathFunctions3 } from "./functions3.js";
 import { MathFunctions2 } from "./functions2.js";
+import { EPSILON, PIAngleDelta } from "./const.js";
+
+export function approxiEquals(v1, v2) {
+  if (v1 === v2) return true;
+  return Math.abs(v1 - v2) < EPSILON;
+}
 
 export class MathFunctions {
-  
   static degreeToAngle(d) {
     return d * 180.0 / Math.PI;
   }
 
   static angleToDegree(a) {
-    return a * MathFunctions._PIAngleDelta;
+    return a * PIAngleDelta;
   }
 
   static fixAngle(angle) {
@@ -32,8 +37,8 @@ export class MathFunctions {
   
   static angleToArc(width, height, angle) {
     return (180.0 / Math.PI * Math.atan2(
-      Math.sin(angle * MathFunctions._PIAngleDelta) * height / width,
-      Math.cos(angle * MathFunctions._PIAngleDelta)));
+      Math.sin(angle * PIAngleDelta) * height / width,
+      Math.cos(angle * PIAngleDelta)));
   }
 
   static abs(v) {
@@ -62,8 +67,5 @@ export class MathFunctions {
   static smoothstep(edge0, edge1, x) {
     var t = MathFunctions.clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
     return t * t * (3.0 - 2.0 * t);
-  }
-  
+  } 
 }
-
-MathFunctions._PIAngleDelta = Math.PI / 180.0;
