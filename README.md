@@ -83,4 +83,6 @@ Functions below available at [src/functions.js](src/functions.js).
 
 # License
 
-MIT © Jingwood, unvell.com, all rights reserved.
+Released under MIT License.
+
+Copyright (C) Jingwood & unvell.com, all rights reserved.
