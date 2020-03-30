@@ -314,21 +314,21 @@ export class MathFunctions2 {
     }
   }
   
-  static _unused_lineIntersectsLineXY(line1StartX, line1StartY, line1EndX, line1EndY,
+  static lineIntersectsLineXYGetPoint(line1StartX, line1StartY, line1EndX, line1EndY,
     line2StartX, line2StartY, line2EndX, line2EndY) {
     // original source: http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
     
-    var denominator = ((line2EndY - line2StartY) * (line1EndX - line1StartX)) - ((line2EndX - line2StartX) * (line1EndY - line1StartY));
+    const denominator = ((line2EndY - line2StartY) * (line1EndX - line1StartX)) - ((line2EndX - line2StartX) * (line1EndY - line1StartY));
     
     if (denominator === 0) {
       return null;
     }
 
-    var a = line1StartY - line2StartY;
-    var b = line1StartX - line2StartX;
+    let a = line1StartY - line2StartY;
+    let b = line1StartX - line2StartX;
 
-    var numerator1 = ((line2EndX - line2StartX) * a) - ((line2EndY - line2StartY) * b);
-    var numerator2 = ((line1EndX - line1StartX) * a) - ((line1EndY - line1StartY) * b);
+    const numerator1 = ((line2EndX - line2StartX) * a) - ((line2EndY - line2StartY) * b);
+    const numerator2 = ((line1EndX - line1StartX) * a) - ((line1EndY - line1StartY) * b);
 
     a = numerator1 / denominator;
     b = numerator2 / denominator;
@@ -338,7 +338,7 @@ export class MathFunctions2 {
     }
 
     // if we cast these lines infinitely in both directions, they intersect here:
-    var result = {
+    const result = {
       x: line1StartX + (a * (line1EndX - line1StartX)),
       y: line1StartY + (a * (line1EndY - line1StartY)),
       ta: a,

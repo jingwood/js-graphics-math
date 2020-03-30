@@ -43,6 +43,10 @@ export class BoundingBox2D {
 		}
 	}
 
+	clone() {
+		return new BoundingBox2D(this);
+	}
+
   get size() {
     return { width: this.width, height: this.height };
 	}
@@ -87,7 +91,17 @@ export class BoundingBox2D {
     return { x, y, width, height };
 	}
 
-	expendToBBox(bbox) {
+	inflate(x, y) {
+		if (x === undefined) x = 0;
+		if (y === undefined) y = x;
+
+		this.min.x -= x;
+		this.min.y -= y;
+		this.max.x += x;
+		this.max.y += y;
+	}
+
+	expandToBBox(bbox) {
 		if (this.min.x > bbox.min.x) this.min.x = bbox.min.x;
 		if (this.min.y > bbox.min.y) this.min.y = bbox.min.y;
 		if (this.max.x < bbox.max.x) this.max.x = bbox.max.x;
