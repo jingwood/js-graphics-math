@@ -30,6 +30,22 @@ export class Vec2 {
 		}
 	}
 
+	offset(v) {
+		switch (arguments.length) {
+			case 1:
+				const arg0 = arguments[0];
+				if (arg0) {
+					this.x += arg0.x;
+					this.y += arg0.y;
+				}
+				break;
+			
+			case 2:
+				this.x += arguments[0]; this.y += arguments[1];
+				break;
+		}
+	}
+
 	add(v2) {
 		return new Vec2(this.x + v2.x, this.y + v2.y);
 	}
