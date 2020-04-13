@@ -40,7 +40,7 @@ export class MathFunctions2 {
   }
 
   static distancePointToLineSegment(p, l) {
-    return MathFunctions2.distancePointToLineSegmentXYXY(p.x, p.y, l.x1, l.y1, l.x2, l.y2);
+    return MathFunctions2.distancePointToLineSegmentXYXY(p.x, p.y, l.start.x, l.start.y, l.end.x, l.end.y);
   }
 
   static distancePointToLineSegment2(p, lp1, lp2) {
