@@ -21,7 +21,7 @@ export class BoundingBox2D {
 			
 			case 1:
 				const bbox2 = arguments[0];
-				if (bbox2 instanceof BoundingBox2D) {
+				if (typeof bbox2.min === "object" && typeof bbox2.max === "object") {
 					this.set(bbox2.min, bbox2.max);
 				}
 				break;

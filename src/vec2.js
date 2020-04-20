@@ -143,8 +143,12 @@ export class Vec2 {
 	}
 
 	equals(v2) {
-		return this.x === v2.x && this.y === v2.y;
-	}
+    return Vec2.equals(this, v2);
+  }
+  
+  static equals(v1, v2) {
+    return v1.x === v2.x && v1.y === v2.y;
+  }
 
 	approxiEquals(v2) {
 		return approxiEquals(this.x, v2.x) && approxiEquals(this.y, v2.y);
