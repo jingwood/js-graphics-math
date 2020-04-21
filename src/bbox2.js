@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { Vec2 } from "./vec2.js"
+import { MathFunctions2 as _mf2 } from "./functions2.js"
 
 export class BoundingBox2D {
 	constructor() {
@@ -145,7 +146,7 @@ export class BoundingBox2D {
 		}
 	}
 
-	// @deprecate
+	// @deprecate by containsPoint
 	contains(p) {
 		return this.containsPoint(p);
 	}
@@ -158,7 +159,11 @@ export class BoundingBox2D {
 	containsRect(rect) {
 		return rect.x >= this.min.x && rect.y >= this.min.y
 			&& rect.right < this.max.x && rect.bottom < this.max.y;
-	}
+  }
+  
+  intersectsRect(rect) { 
+    return _mf2.rectIntersectsRect(this.rect, rect);
+  }
 
 	intersectsBBox2D(box2) {
 		if (this.max.x < box2.min.x) return false;

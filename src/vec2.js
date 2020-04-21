@@ -151,9 +151,13 @@ export class Vec2 {
   }
 
 	approxiEquals(v2) {
-		return approxiEquals(this.x, v2.x) && approxiEquals(this.y, v2.y);
+		return Vec2.approxiEquals(this, v2);
 	}
 
+	static approxiEquals(v1, v2) {
+		return approxiEquals(v1.x, v2.x) && approxiEquals(v1.y, v2.y);
+  }
+  
 	toString() {
 		return "[" + toStringWithDigits(this.x) + ", " + (this.y) + "]";
 	}
@@ -176,7 +180,15 @@ export class Vec2 {
 		let angle = Math.atan2((v2.y - v1.y), (v2.x - v1.x));
 		angle = angle * 180 / Math.PI;
 		return angle;
-	}
+  }
+  
+  abs() {
+    return Vec2.abs(this);
+  }
+
+  static abs(v) {
+    return new Vec2(Math.abs(v.x), Math.abs(v.y));
+  }
 }	
 
 Vec2.zero = new Vec2(0, 0);
