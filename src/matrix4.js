@@ -35,7 +35,11 @@ export class Matrix4 {
 		this.a4 = m.a4; this.b4 = m.b4; this.c4 = m.c4; this.d4 = m.d4;
 
 		return this;
-	}
+  }
+  
+  clone() {
+    return new Matrix4(this);
+  }
 	
 	/*
 	 * Makes a rotation matrix by given euler angles and multiplies by this matrix.
