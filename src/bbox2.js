@@ -206,6 +206,18 @@ export class BoundingBox2D {
 		return bbox;
 	}
 
+  applyTransform(matrix) {
+    const v1 = this.min.mulMat(matrix);
+		const v2 = new Vec2(this.max.x, this.min.y).mulMat(matrix);
+		const v3 = new Vec2(this.min.x, this.max.y).mulMat(matrix);
+		const v4 = this.max.mulMat(matrix);
+
+		this.min.x = Math.min(v1.x, v2.x, v3.x, v4.x);
+		this.min.y = Math.min(v1.y, v2.y, v3.y, v4.y);
+		this.max.x = Math.max(v1.x, v2.x, v3.x, v4.x);
+		this.max.y = Math.max(v1.y, v2.y, v3.y, v4.y);
+  }
+
 	transform(matrix) {
 		return BoundingBox2D.transform(this, matrix);
 	}
