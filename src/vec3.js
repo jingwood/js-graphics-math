@@ -93,16 +93,42 @@ export class Vec3 {
 			this.x * m.b1 + this.y * m.b2 + this.z * m.b3,
 			this.x * m.c1 + this.y * m.c2 + this.z * m.c3);
 	}
-	
+  
+  get magnitude() {
+		return Vec3.length(this);
+	}
+
+	static magnitude(v) {
+		return Vec3.length(v);
+  }
+  
 	length() {
 		return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-	}
-	
+  }
+  
+  static length(v) {
+		return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+  }
+
+  static getLength(v) {
+		return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+  }
+  
 	normalize() {
 		var scalar = 1 / this.length();
 		
 		if (isFinite(scalar)) {
 			return new Vec3(this.x * scalar, this.y * scalar, this.z * scalar);
+		} else {
+			return new Vec3();
+		}
+  }
+  
+	static normalize(v) {
+		var scalar = 1 / Vec3.getLength(v);
+	
+		if (isFinite(scalar)) {
+			return new Vec3(v.x * scalar, v.y * scalar, v.z * scalar);
 		} else {
 			return new Vec3();
 		}
@@ -238,20 +264,6 @@ export class Vec3 {
 		return new Vec3(v1.y * v2.z - v1.z * v2.y,
 			-(v1.x * v2.z - v1.z * v2.x),
 			v1.x * v2.y - v1.y * v2.x);
-	}
-
-	static getLength(v) {
-		return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-	}
-
-	static normalize(v) {
-		var scalar = 1 / Vec3.getLength(v);
-	
-		if (isFinite(scalar)) {
-			return new Vec3(v.x * scalar, v.y * scalar, v.z * scalar);
-		} else {
-			return new Vec3();
-		}
 	}
 }
 
