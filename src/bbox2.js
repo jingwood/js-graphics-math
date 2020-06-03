@@ -5,8 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec2 } from "./vec2.js"
-import { MathFunctions2 as _mf2 } from "./functions2.js"
+import { Vec2 } from "./vec2.js";
+import { MathFunctions2 as _mf2 } from "./functions2.js";
 
 export class BoundingBox2D {
 	constructor() {

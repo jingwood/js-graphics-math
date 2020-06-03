@@ -177,10 +177,7 @@ export class BoundingBox3D {
 		if (!bboxA) return bboxB;
 		if (!bboxB) return bboxA;
 
-		var bbox = {
-			min: new Vec3(),
-			max: new Vec3()
-		};
+    const bbox = new BoundingBox3D();
 
 		bbox.min.x = bboxA.min.x < bboxB.min.x ? bboxA.min.x : bboxB.min.x;
 		bbox.max.x = bboxA.max.x > bboxB.max.x ? bboxA.max.x : bboxB.max.x;
@@ -189,8 +186,10 @@ export class BoundingBox3D {
 		bbox.max.y = bboxA.max.y > bboxB.max.y ? bboxA.max.y : bboxB.max.y;
 
 		bbox.min.z = bboxA.min.z < bboxB.min.z ? bboxA.min.z : bboxB.min.z;
-		bbox.max.z = bboxA.max.z > bboxB.max.z ? bboxA.max.z : bboxB.max.z;
-	
+    bbox.max.z = bboxA.max.z > bboxB.max.z ? bboxA.max.z : bboxB.max.z;
+
+    bbox.makeDirty();
+
 		return bbox;
 	}
 	
@@ -208,9 +207,9 @@ export class BoundingBox3D {
 		var yList = [ruf.y, rub.y, rdf.y, rdb.y, luf.y, lub.y, ldf.y, ldb.y];
 		var zList = [ruf.z, rub.z, rdf.z, rdb.z, luf.z, lub.z, ldf.z, ldb.z];
 
-		return {
-			min: new Vec3(Math.min.apply(null, xList), Math.min.apply(null, yList), Math.min.apply(null, zList)),
-			max: new Vec3(Math.max.apply(null, xList), Math.max.apply(null, yList), Math.max.apply(null, zList))
-		};
+    return new BoundingBox3D(
+			new Vec3(Math.min.apply(null, xList), Math.min.apply(null, yList), Math.min.apply(null, zList)),
+			new Vec3(Math.max.apply(null, xList), Math.max.apply(null, yList), Math.max.apply(null, zList))
+    );
 	}
 }
