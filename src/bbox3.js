@@ -47,7 +47,7 @@ export class BoundingBox3D {
 	}
 	set min(v) {
 		this._min = v;
-		this._dirty = true;
+		this.makeDirty();
 	}
 
 	get max() {
@@ -55,7 +55,7 @@ export class BoundingBox3D {
 	}
 	set max(v) {
 		this._max = v;
-		this._dirty = true;
+		this.makeDirty();
 	}
 
 	_updateSizeAndOrigin() {
@@ -91,7 +91,11 @@ export class BoundingBox3D {
 		}
 
 		return this._origin;
-	}
+  }
+  
+  makeDirty() {
+    this._dirty = true;
+  }
 
 	offset(off) {
 		this._max = Vec3.add(this._max, off);
