@@ -6,7 +6,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 export class Quaternion {
-	constructor() {
-		throw "not available yet";
-	}
+  constructor(x, y, z, w) {
+    this.x = x !== undefined ? x : 0;
+    this.y = y !== undefined ? y : 0;
+    this.z = z !== undefined ? z : 0;
+    this.w = w !== undefined ? w : 1;
+
+    throw new Error("Not supported yet");
+  }
 };

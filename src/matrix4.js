@@ -44,31 +44,58 @@ export class Matrix4 {
 	/*
 	 * Makes a rotation matrix by given euler angles and multiplies by this matrix.
 	 */
-	rotate(x, y, z, order) {
+	rotate(x, yOrOrder = 'XYZ', z, order = 'XYZ') {
+    console.log('arguments.length = ' + arguments.length);
+    console.log('rotated order by ' + order);
 
-		// TODO: handle the 'order' parameter
+    if (typeof x === 'object' && x instanceof Vec3) {
+      order = yOrOrder;
 
-		switch (arguments.length) {
-			case 1:
-				if (typeof x === "object" && x instanceof Vec3) {
-					this.rotateX(x.x);
-					this.rotateY(x.y);
-					this.rotateZ(x.z);
-				}
-				break;
+      if (order === 'XYZ') {
+        this.rotateX(x.x);
+        this.rotateY(x.y);
+        this.rotateZ(x.z);
+      } else if (order === 'XZY') {
+        this.rotateX(x.x);
+        this.rotateZ(x.z);
+        this.rotateY(x.y);
+      }
 
-			case 3:
-				if (y !== undefined && z !== undefined) {
-					this.rotateX(x);
-					this.rotateY(y);
-					this.rotateZ(z);
-				}
-				break;
-		}
+      // TODO: other orders
+    }
+    else if (!isNaN(x) && !isNaN(yOrOrder) && !isNaN(z)) {
+      const y = yOrOrder;
+
+      if (order === 'XYZ') {
+        this.rotateX(x);
+        this.rotateY(y);
+        this.rotateZ(z);
+      } else if (order === 'XZY') {
+        this.rotateX(x);
+        this.rotateZ(z);
+        this.rotateY(y);
+      } else if (order === 'ZYX') {
+        this.rotateZ(z);
+        this.rotateY(y);
+        this.rotateX(x);
+      } else if (order === 'ZXY') {
+        this.rotateZ(z);
+        this.rotateX(x);
+        this.rotateY(y);
+      } else if (order === 'YXZ') {
+        this.rotateY(y);
+        this.rotateX(x);
+        this.rotateZ(z);
+      } else if (order === 'YZX') {
+        this.rotateY(y);
+        this.rotateZ(z);
+        this.rotateX(x);
+      }
+    }
 
 		// TODO: Need to be optimized by combining Rx Ry Rz calculation
 		// this.rotateCombine(x, y, z);
-	
+
 		return this;
 	}
 
