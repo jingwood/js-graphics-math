@@ -44,10 +44,8 @@ export class Matrix4 {
 	/*
 	 * Makes a rotation matrix by given euler angles and multiplies by this matrix.
 	 */
-	rotate(x, yOrOrder = 'XYZ', z, order = 'XYZ') {
-    console.log('arguments.length = ' + arguments.length);
-    console.log('rotated order by ' + order);
-
+  rotate(x, yOrOrder = 'XYZ', z, order = 'XYZ') {
+    
     if (typeof x === 'object' && x instanceof Vec3) {
       order = yOrOrder;
 
