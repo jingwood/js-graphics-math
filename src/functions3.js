@@ -7,7 +7,11 @@
 
 import { Vec3 } from "./vec3.js"
 import { Vec4 } from "./vec4.js"
-import { MathFunctions } from "./functions.js";
+import { approxiEquals, MathFunctions } from "./functions.js";
+
+export function approxiEquals3(v1, v2) {
+  return approxiEquals(v1.x, v2.x) && approxiEquals(v1.y, v2.y) && approxiEquals(v1.z, v2.z);
+}
 
 export class MathFunctions3 {
   static clamp3(v, min = 0, max = 1) {

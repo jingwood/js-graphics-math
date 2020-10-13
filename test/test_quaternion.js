@@ -3,16 +3,14 @@ import { Quaternion } from "../src/quaternion.js";
 import { Matrix4 } from "../src/matrix4.js";
 
 testSuite("Quaternion")
-  .test("toMat", function(t) {
+  .test("toMatrix", function(t) {
     const q1 = new Quaternion(0.259, 0.0, 0.0, 0.966);
+    const mat1 = q1.toMatrix();
    
-    const tmat = new Matrix4().loadIdentity();
-    tmat.rotateX(30);
+    const mat2 = new Matrix4().loadIdentity();
+    mat2.rotateX(30);
 
-    console.log(q1.toMatrix());
-    console.log(tmat);
-
-
-    // t.assert(Vec3.add(v1, v2), new Vec3(3, 5, -3));
+    // console.log(mat1, mat2);
+    // t.assert(mat1.approxiEquals(mat2));
   })
   .stats()

@@ -50,10 +50,15 @@ class _TestSuite {
     console.log(` done ${this.tested} tested, ${this.successed} successed, ${this.failed} failed.\n`);
   }
 
-  assertTrue(res) {
+  assertTrue(res, expect) {
     if (!res) {
       this._currentTestSuccess = false;
-      console.log(` - '${this._currentTestName}' failed, expect ${expect} but ${ret}`);
+
+      if (expect) {
+        console.log(` - '${this._currentTestName}' failed, expect ${expect} but ${ret}`);
+      } else {
+        console.log(` - '${this._currentTestName}' failed`);
+      }
     }
   }
 

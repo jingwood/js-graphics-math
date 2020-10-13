@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { Vec3 } from "./vec3.js";
-import { MathFunctions } from "./functions.js";
+import { approxiEquals, MathFunctions } from "./functions.js";
 
 export class Matrix4 {
 	constructor(copySource) {
@@ -392,6 +392,13 @@ export class Matrix4 {
 			&& this.a2 === m2.a2 && this.b2 === m2.b2 && this.c2 === m2.c2 && this.d2 === m2.d2
 			&& this.a3 === m2.a3 && this.b3 === m2.b3 && this.c3 === m2.c3 && this.d3 === m2.d3
 			&& this.a4 === m2.a4 && this.b4 === m2.b4 && this.c4 === m2.c4 && this.d4 === m2.d4;
+	}
+  
+	approxiEquals(mat2) {
+    return approxiEquals(this.a1, mat2.a1) && approxiEquals(this.b1, mat2.b1) && approxiEquals(this.c1, mat2.c1) && approxiEquals(this.d1, mat2.d1)
+      && approxiEquals(this.a2, mat2.a2) && approxiEquals(this.b2, mat2.b2) && approxiEquals(this.c2, mat2.c2) && approxiEquals(this.d2, mat2.d2)
+      && approxiEquals(this.a3, mat2.a3) && approxiEquals(this.b3, mat2.b3) && approxiEquals(this.c3, mat2.c3) && approxiEquals(this.d3, mat2.d3)
+      && approxiEquals(this.a4, mat2.a4) && approxiEquals(this.b4, mat2.b4) && approxiEquals(this.c4, mat2.c4) && approxiEquals(this.d4, mat2.d4);
 	}
 
 	frustum(left, right, top, bottom, near, far) {

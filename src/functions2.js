@@ -6,7 +6,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { Vec2 } from "./vec2.js";
-import { MathFunctions } from "./functions.js";
+import { approxiEquals, MathFunctions } from "./functions.js";
+
+export function approxiEquals2(v1, v2) {
+  return approxiEquals(v1.x, v2.x) && approxiEquals(v1.y, v2.y);
+}
 
 export class MathFunctions2 {
   static clamp2(v, min = 0, max = 1) {
