@@ -12,9 +12,9 @@ import { MathFunctions3 } from "./functions3.js";
 import { MathFunctions2 } from "./functions2.js";
 import { EPSILON, PIAngleDelta } from "./const.js";
 
-export function approxiEquals(v1, v2) {
+export function approxiEquals(v1, v2, epsilon = EPSILON) {
   if (v1 === v2) return true;
-  return Math.abs(v1 - v2) < EPSILON;
+  return Math.abs(v1 - v2) < epsilon;
 }
 
 export class MathFunctions {

@@ -9,6 +9,8 @@ import { Matrix4 } from "./matrix4.js";
 import { Vec2 } from "./vec2.js";
 import { toStringWithDigits, roundDigits } from "./utility.js";
 import { approxiEquals } from "./functions.js";
+import { EPSILON } from "./const.js";
+import { approxiEquals3 } from "./functions3.js";
 
 export class Vec3 {
 	constructor() {
@@ -66,26 +68,13 @@ export class Vec3 {
 		return this.approxiEquals(...arguments);
 	}	
 
-	approxiEquals() {
-		switch (arguments.length) {
-			default:
-				return false;
-	
-			case 1:
-				{
-					const obj = arguments[0];
-					return (typeof obj === "object")
-						&& approxiEquals(this.x, obj.x)
-						&& approxiEquals(this.y, obj.y)
-						&& approxiEquals(this.z, obj.z);
-				}
-	
-			case 3:
-				return approxiEquals(this.x, arguments[0])
-					&& approxiEquals(this.y, arguments[1])
-					&& approxiEquals(this.z, arguments[2]);
-		}
-	}
+  approxiEquals(v2, epsilon = EPSILON) {
+    if (typeof v2 !== 'object') {
+      return false;
+    }
+
+    return approxiEquals3(this, v2, epsilon);
+  }
 	
 	mulMat(m) {
 		return new Vec3(

@@ -7,6 +7,7 @@
 
 import { Vec3 } from "./vec3.js";
 import { approxiEquals, MathFunctions } from "./functions.js";
+import { EPSILON } from "./const.js";
 
 export class Matrix4 {
 	constructor(copySource) {
@@ -46,48 +47,85 @@ export class Matrix4 {
 	 */
   rotate(x, yOrOrder = 'XYZ', z, order = 'XYZ') {
     
-    if (typeof x === 'object' && x instanceof Vec3) {
-      order = yOrOrder;
+    if (typeof x === 'object') {
+      order = yOrOrder || 'xyz';
 
-      if (order === 'XYZ') {
-        this.rotateX(x.x);
-        this.rotateY(x.y);
-        this.rotateZ(x.z);
-      } else if (order === 'XZY') {
-        this.rotateX(x.x);
-        this.rotateZ(x.z);
-        this.rotateY(x.y);
+      switch (order) {
+        case 'XYZ':
+          this.rotateX(x.x);
+          this.rotateY(x.y);
+          this.rotateZ(x.z);
+          break;
+        
+        case 'XZY':
+          this.rotateX(x.x);
+          this.rotateZ(x.z);
+          this.rotateY(x.y);
+          break;
+        
+        case 'YXZ':
+          this.rotateY(x.y);
+          this.rotateX(x.x);
+          this.rotateZ(x.z);
+          break;
+        
+        case 'YZX':
+          this.rotateY(x.y);
+          this.rotateZ(x.z);
+          this.rotateX(x.x);
+          break;
+               
+        case 'ZXY':
+          this.rotateZ(x.z);
+          this.rotateX(x.x);
+          this.rotateY(x.y);
+          break;
+
+        case 'ZYX':
+          this.rotateZ(x.z);
+          this.rotateY(x.y);
+          this.rotateX(x.x);
+          break;
       }
-
-      // TODO: other orders
-    }
-    else if (!isNaN(x) && !isNaN(yOrOrder) && !isNaN(z)) {
+    } else if (!isNaN(x) && !isNaN(yOrOrder) && !isNaN(z)) {
       const y = yOrOrder;
 
-      if (order === 'XYZ') {
-        this.rotateX(x);
-        this.rotateY(y);
-        this.rotateZ(z);
-      } else if (order === 'XZY') {
-        this.rotateX(x);
-        this.rotateZ(z);
-        this.rotateY(y);
-      } else if (order === 'ZYX') {
-        this.rotateZ(z);
-        this.rotateY(y);
-        this.rotateX(x);
-      } else if (order === 'ZXY') {
-        this.rotateZ(z);
-        this.rotateX(x);
-        this.rotateY(y);
-      } else if (order === 'YXZ') {
-        this.rotateY(y);
-        this.rotateX(x);
-        this.rotateZ(z);
-      } else if (order === 'YZX') {
-        this.rotateY(y);
-        this.rotateZ(z);
-        this.rotateX(x);
+      switch (order) {
+        case 'XYZ':
+          this.rotateX(x);
+          this.rotateY(y);
+          this.rotateZ(z);
+          break;
+        
+        case 'XZY':
+          this.rotateX(x);
+          this.rotateZ(z);
+          this.rotateY(y);
+          break;
+        
+        case 'ZYX':
+          this.rotateZ(z);
+          this.rotateY(y);
+          this.rotateX(x);
+          break;
+        
+        case 'ZXY':
+          this.rotateZ(z);
+          this.rotateX(x);
+          this.rotateY(y);
+          break;
+        
+        case 'YXZ':
+          this.rotateY(y);
+          this.rotateX(x);
+          this.rotateZ(z);
+          break;
+        
+        case 'YZX':
+          this.rotateY(y);
+          this.rotateZ(z);
+          this.rotateX(x);
+          break;
       }
     }
 
@@ -394,11 +432,15 @@ export class Matrix4 {
 			&& this.a4 === m2.a4 && this.b4 === m2.b4 && this.c4 === m2.c4 && this.d4 === m2.d4;
 	}
   
-	approxiEquals(mat2) {
-    return approxiEquals(this.a1, mat2.a1) && approxiEquals(this.b1, mat2.b1) && approxiEquals(this.c1, mat2.c1) && approxiEquals(this.d1, mat2.d1)
-      && approxiEquals(this.a2, mat2.a2) && approxiEquals(this.b2, mat2.b2) && approxiEquals(this.c2, mat2.c2) && approxiEquals(this.d2, mat2.d2)
-      && approxiEquals(this.a3, mat2.a3) && approxiEquals(this.b3, mat2.b3) && approxiEquals(this.c3, mat2.c3) && approxiEquals(this.d3, mat2.d3)
-      && approxiEquals(this.a4, mat2.a4) && approxiEquals(this.b4, mat2.b4) && approxiEquals(this.c4, mat2.c4) && approxiEquals(this.d4, mat2.d4);
+	approxiEquals(mat2, epsilon = EPSILON) {
+    return approxiEquals(this.a1, mat2.a1, epsilon) && approxiEquals(this.b1, mat2.b1, epsilon)
+      && approxiEquals(this.c1, mat2.c1, epsilon) && approxiEquals(this.d1, mat2.d1, epsilon)
+      && approxiEquals(this.a2, mat2.a2, epsilon) && approxiEquals(this.b2, mat2.b2, epsilon)
+      && approxiEquals(this.c2, mat2.c2, epsilon) && approxiEquals(this.d2, mat2.d2, epsilon)
+      && approxiEquals(this.a3, mat2.a3, epsilon) && approxiEquals(this.b3, mat2.b3, epsilon)
+      && approxiEquals(this.c3, mat2.c3, epsilon) && approxiEquals(this.d3, mat2.d3, epsilon)
+      && approxiEquals(this.a4, mat2.a4, epsilon) && approxiEquals(this.b4, mat2.b4, epsilon)
+      && approxiEquals(this.c4, mat2.c4, epsilon) && approxiEquals(this.d4, mat2.d4, epsilon);
 	}
 
 	frustum(left, right, top, bottom, near, far) {
@@ -513,7 +555,6 @@ export class Matrix4 {
 	}
 	
 	toFloat32Array() {
-		this.updateArray();
 		return new Float32Array(this.toArray());
 	}
 }

@@ -15,7 +15,25 @@ export class Quaternion {
     this.y = y !== undefined ? y : 0;
     this.z = z !== undefined ? z : 0;
     this.w = w !== undefined ? w : 1;
+  }
 
+  _sq() {
+
+  }
+
+  normalize() {
+    const len = Math.sqrt(x * x + y * y + z * z + w * w);
+
+    if (len < Quaternion.Epsilon) {
+      return Quaternion.Zero;
+    }
+
+    const invlen = 1 / len;
+
+    this.x *= invlen;
+    this.y *= invlen;
+    this.z *= invlen;
+    this.w *= invlen;
   }
 
   toMatrix() {
@@ -29,7 +47,7 @@ export class Quaternion {
     const sqz = q.z * q.z;
 
     // invs (inverse square length) is only required if quaternion is not already normalised
-    const invs = 1 / (sqx + sqy + sqz + sqw)
+    const invs = 1 / (sqx + sqy + sqz + sqw);
     const m00 = (sqx - sqy - sqz + sqw) * invs; // since sqw + sqx + sqy + sqz =1/invs*invs
     const m11 = (-sqx + sqy - sqz + sqw) * invs;
     const m22 = (-sqx - sqy + sqz + sqw) * invs;
@@ -57,3 +75,7 @@ export class Quaternion {
     return mat;
   }
 };
+
+Quaternion.Epsilon = 0.000001;
+Quaternion.Zero = new Quaternion(0, 0, 0, 0);
+Quaternion.One = new Quaternion(0, 0, 0, 1);

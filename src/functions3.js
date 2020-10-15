@@ -8,9 +8,10 @@
 import { Vec3 } from "./vec3.js"
 import { Vec4 } from "./vec4.js"
 import { approxiEquals, MathFunctions } from "./functions.js";
+import { EPSILON } from "./const.js";
 
-export function approxiEquals3(v1, v2) {
-  return approxiEquals(v1.x, v2.x) && approxiEquals(v1.y, v2.y) && approxiEquals(v1.z, v2.z);
+export function approxiEquals3(v1, v2, epsilon = EPSILON) {
+  return approxiEquals(v1.x, v2.x, epsilon) && approxiEquals(v1.y, v2.y, epsilon) && approxiEquals(v1.z, v2.z, epsilon);
 }
 
 export class MathFunctions3 {
