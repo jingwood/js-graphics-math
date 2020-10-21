@@ -560,3 +560,4 @@ export class Matrix4 {
 }
 
 Matrix4.Identity = new Matrix4().loadIdentity();
+Matrix4.IdentityArray = new Matrix4().loadIdentity().toArray();
