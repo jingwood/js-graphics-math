@@ -54,53 +54,45 @@ export class Quaternion {
   }
 
   /*
-   * copy from threejs
+   * original code copied from threejs
    * https://github.com/mrdoob/three.js/blob/master/src/math/Quaternion.js
+   * http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/
    */
-  slerp(qb, t) {
+  static slerp(qa, qb, t) {
 
-    if (t === 0) return this;
-    if (t === 1) return this.copyFrom(qb);
+    if (t === 0) return qa;
+    if (t === 1) return qb;
 
-    const x = this.x, y = this.y, z = this.z, w = this.w;
+    const { x, y, z, w } = qa;
+    let _x = x, _y = y, _z = z, _w = w;
 
-    // http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/
-
-    let cosHalfTheta = w * qb.w + x * qb.x + y * qb.y + z * qb.z;
+    let cosHalfTheta = x * qb.x + y * qb.y + z * qb.z + w * qb.w;
 
     if (cosHalfTheta < 0) {
-      this.w = - qb.w;
-      this.x = - qb.x;
-      this.y = - qb.y;
-      this.z = - qb.z;
+      _x = -qb.x;
+      _y = -qb.y;
+      _z = -qb.z;
+      _w = -qb.w;
 
-      cosHalfTheta = - cosHalfTheta;
+      cosHalfTheta = -cosHalfTheta;
     } else {
-      this.copyFrom(qb);
+      _x = qb.x; _y = qb.y; _z = qb.z; _w = qb.w;
     }
 
     if (cosHalfTheta >= 1.0) {
-      this.w = w;
-      this.x = x;
-      this.y = y;
-      this.z = z;
-
-      return this;
+      return new Quaternion(_x, _y, _z, _w);
     }
 
     const sqrSinHalfTheta = 1.0 - cosHalfTheta * cosHalfTheta;
 
     if (sqrSinHalfTheta <= Number.EPSILON) {
       const s = 1 - t;
-      this.w = s * w + t * this.w;
-      this.x = s * x + t * this.x;
-      this.y = s * y + t * this.y;
-      this.z = s * z + t * this.z;
+      _x = s * x + t * _x;
+      _y = s * y + t * _y;
+      _z = s * z + t * _z;
+      _w = s * w + t * _w;
 
-      this.normalize();
-      // this._onChangeCallback();
-
-      return this;
+      return new Quaternion(_x, _y, _z, _w).normalize();
     }
 
     const sinHalfTheta = Math.sqrt(sqrSinHalfTheta);
@@ -108,13 +100,13 @@ export class Quaternion {
     const ratioA = Math.sin((1 - t) * halfTheta) / sinHalfTheta,
       ratioB = Math.sin(t * halfTheta) / sinHalfTheta;
 
-    this.w = (w * ratioA + this.w * ratioB);
-    this.x = (x * ratioA + this.x * ratioB);
-    this.y = (y * ratioA + this.y * ratioB);
-    this.z = (z * ratioA + this.z * ratioB);
+    _x = (x * ratioA + this.x * ratioB);
+    _y = (y * ratioA + this.y * ratioB);
+    _z = (z * ratioA + this.z * ratioB);
+    _w = (w * ratioA + this.w * ratioB);
 
     // this._onChangeCallback();
-    return this;
+    return new Quaternion(_x, _y, _z, _w);
   }
 
   // multiply(q) {
