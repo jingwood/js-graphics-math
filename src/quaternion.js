@@ -228,6 +228,28 @@ export class Quaternion {
     return q;
   }
 
+  // multiply(q) {
+  //   return this.perfromMultiply(this, q);
+  // }
+
+  // premultiply(q) {
+  //   return this.perfromMultiply(q, this);
+  // }
+
+	static multiply(a, b) {
+		// from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
+
+		const qax = a.x, qay = a.y, qaz = a.z, qaw = a.w;
+		const qbx = b.x, qby = b.y, qbz = b.z, qbw = b.w;
+
+		const x = qax * qbw + qaw * qbx + qay * qbz - qaz * qby;
+		const y = qay * qbw + qaw * qby + qaz * qbx - qax * qbz;
+		const z = qaz * qbw + qaw * qbz + qax * qby - qay * qbx;
+    const w = qaw * qbw - qax * qbx - qay * qby - qaz * qbz;
+    
+    return new Quaternion(x, y, z, w);
+	}
+
   toMatrix() {
     // https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/index.htm
 
