@@ -119,7 +119,11 @@ export class Vec2 {
 
 	static length(v) {
 		return Math.sqrt(v.x * v.x + v.y * v.y);
-	}
+  }
+  
+  static lengthBetween(v1, v2) {
+    return Vec2.length(Vec2.sub(v2, v1));
+  }
 
 	normalize() {
 		return Vec2.normalize(this);
