@@ -46,13 +46,13 @@ testSuite("Quaternion")
   .test('fromVector', t => {
     const v1 = new Vec3(0, 0, 0), v2 = new Vec3(1, 0, 1);
 
-    const q = Quaternion.fromVectors(Vec3.forward, Vec3.normalize(v2).neg());
+    const q = Quaternion.fromVectors(Vec3.normalize(v2), Vec3.forward);
     
     const m1 = Matrix4.createLookAt(v1, v2);
     const m2 = q.toMatrix();
     const euler = m2.extractEulerAngles();
 
-    // console.log(m1, m2, euler);
-    t.assert(m1.approxiEquals(m2));
+    console.log(m1, m2, euler);
+    console.log(m1.approxiEquals(m2));
   })
   .stats()
