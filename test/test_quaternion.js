@@ -53,6 +53,9 @@ testSuite("Quaternion")
     const euler = m2.extractEulerAngles();
 
     console.log(m1, m2, euler);
-    console.log(m1.approxiEquals(m2));
+
+    const t1 = m1.approxiEquals(m2);
+    console.log(t1);
+    t.assert(t1);
   })
   .stats()

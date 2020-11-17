@@ -13,14 +13,7 @@ import { Matrix4 } from "./matrix4.js";
 export class Quaternion {
 
   constructor(x, y, z, w) {
-    if (typeof x === 'object') {
-      this.copyFrom(x);
-    } else {
-      this.x = !isNaN(x) ? x : 0;
-      this.y = !isNaN(y) ? y : 0;
-      this.z = !isNaN(z) ? z : 0;
-      this.w = !isNaN(w) ? w : 1;
-    }
+    this.set(...arguments);
   }
 
   copyFrom(q2) {
@@ -30,6 +23,27 @@ export class Quaternion {
 		this.w = q2.w;
 
 		return this;
+  }
+
+  set(x, y, z, w) {
+    if (typeof x === 'object') {
+      if (x instanceof Vec3) {
+        // set from (vec3, w)
+        this.x = x.x;
+        this.y = x.y;
+        this.z = x.z;
+        this.w = arguments[1];
+      } else {
+        // set from (vec4 or q)
+        this.copyFrom(x);
+      }
+    } else {
+      // set from (x, y, z, w)
+      this.x = !isNaN(x) ? x : 0;
+      this.y = !isNaN(y) ? y : 0;
+      this.z = !isNaN(z) ? z : 0;
+      this.w = !isNaN(w) ? w : 1;
+    }
   }
 
   length() {
@@ -125,14 +139,6 @@ export class Quaternion {
   static add(q1, q2) {
     return new Quaternion(q1.x + q2.x, q1.y + q2.y, q1.z + q2.z, q1.w + q2.w);
   }
-
-  // multiply(q) {
-  //   return this.perfromMultiply(this, q);
-  // }
-
-  // premultiply(q) {
-  //   return this.perfromMultiply(q, this);
-  // }
 
 	static mul(q1, q2) {
 		// from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
@@ -233,31 +239,36 @@ export class Quaternion {
   // https://github.com/mrdoob/three.js/blob/master/src/math/Quaternion.js
   //
   setFromVectors(from, to) {
-    // assumes direction vectors vFrom and vTo are normalized
-    const EPS = 0.000001;
-    let r = Vec3.dot(from, to) + 1;
+    // // assumes direction vectors vFrom and vTo are normalized
+    // const EPS = 0.000001;
+    // let r = Vec3.dot(from, to) + 1;
 
-    if (r < EPS) {
-      r = 0;
+    // if (r < EPS) {
+    //   r = 0;
 
-      if (Math.abs(from.x) > Math.abs(from.z)) {
-        this.x = -from.y;
-        this.y = from.x;
-        this.z = 0;
-        this.w = r;
-      } else {
-        this.x = 0;
-        this.y = -from.z;
-        this.z = from.y;
-        this.w = r;
-      }
-    } else {
-      // crossVectors( vFrom, vTo ); // inlined to avoid cyclic dependency on Vector3
-      this.x = from.y * to.z - from.z * to.y;
-      this.y = from.z * to.x - from.x * to.z;
-      this.z = from.x * to.y - from.y * to.x;
-      this.w = r;
-    }
+    //   if (Math.abs(from.x) > Math.abs(from.z)) {
+    //     this.x = -from.y;
+    //     this.y = from.x;
+    //     this.z = 0;
+    //     this.w = r;
+    //   } else {
+    //     this.x = 0;
+    //     this.y = -from.z;
+    //     this.z = from.y;
+    //     this.w = r;
+    //   }
+    // } else {
+    //   // crossVectors( vFrom, vTo ); // inlined to avoid cyclic dependency on Vector3
+    //   this.x = from.y * to.z - from.z * to.y;
+    //   this.y = from.z * to.x - from.x * to.z;
+    //   this.z = from.x * to.y - from.y * to.x;
+    //   this.w = r;
+    // }
+
+    const a = Vec3.cross(from, to);
+    const w = Math.sqrt((from.length() ** 2) * (to.length() ** 2)) + Vec3.dot(from, to);
+    
+    this.set(a, w);
 
     return this.normalize();
   }
@@ -315,7 +326,7 @@ export class Quaternion {
     q.setFromRotationMatrix(m);
     return q;
   }
-  
+
   // multiply(q) {
   //   return this.perfromMultiply(this, q);
   // }
@@ -379,4 +390,4 @@ export class Quaternion {
 
 };
 
-Quaternion.Zero = new Quaternion(0, 0, 0, 1);
+Quaternion.zero = new Quaternion(0, 0, 0, 1);
