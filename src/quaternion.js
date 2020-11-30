@@ -54,7 +54,7 @@ export class Quaternion {
     let len = this.length();
 
     if (len < EPSILON) {
-      return Quaternion.Zero;
+      return Quaternion.zero;
     }
 
     len = 1 / len;
@@ -160,11 +160,12 @@ export class Quaternion {
       throw new Error('Quaternion.setFromEuler() expects an object contains x, y, z properties');
     }
 
-    const { x, y, z } = euler;
+    let { x, y, z } = euler;
+    x = x / 180 * Math.PI;
+    y = y / 180 * Math.PI;
+    z = z / 180 * Math.PI;
 
-    // http://www.mathworks.com/matlabcentral/fileexchange/
-    // 	20696-function-to-convert-between-dcm-euler-angles-quaternions-and-euler-vectors/
-    //	content/SpinCalc.m
+    // http://www.mathworks.com/matlabcentral/fileexchange/20696-function-to-convert-between-dcm-euler-angles-quaternions-and-euler-vectors/content/SpinCalc.m
 
     const cos = Math.cos;
     const sin = Math.sin;
