@@ -8,6 +8,7 @@
 import { Vec3 } from "./vec3.js";
 import { approxiEquals, MathFunctions } from "./functions.js";
 import { EPSILON } from "./const.js";
+import { Vec4 } from "./vec4.js";
 
 export class Matrix4 {
 	constructor(copySource) {
@@ -480,8 +481,8 @@ export class Matrix4 {
 	/*
 	 * Make a lookat matrix. This method does not require an identity matrix.
 	 */
-	lookAt(eye, target, up) {
-		const zaxis = Vec3.sub(eye, target).normalize();    // forward
+	lookAt(location, target, up) {
+		const zaxis = Vec3.sub(location, target).normalize();    // forward
 		const xaxis = Vec3.cross(up, zaxis).normalize();    // right
 		const yaxis = Vec3.cross(zaxis, xaxis);             // up
 
@@ -495,7 +496,13 @@ export class Matrix4 {
 		this.a4 = 0; this.b4 = 0; this.c4 = 0; this.d4 = 1;
 
 		return this;
-	}
+  }
+  
+  static createLookAt(location, target, up = Vec3.up) {
+    const mat = new Matrix4();
+    mat.lookAt(location, target, up);
+    return mat;
+  }
 
 	extractEulerAngles() {
 		const

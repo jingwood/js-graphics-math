@@ -6,20 +6,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import { EPSILON } from "./const.js";
+import { Vec3 } from "./vec3.js";
 import { Matrix4 } from "./matrix4.js";
 
 // Experimental!!
 export class Quaternion {
 
   constructor(x, y, z, w) {
-    if (typeof x === 'object') {
-      this.copyFrom(x);
-    } else {
-      this.x = !isNaN(x) ? x : 0;
-      this.y = !isNaN(y) ? y : 0;
-      this.z = !isNaN(z) ? z : 0;
-      this.w = !isNaN(w) ? w : 1;
-    }
+    this.set(...arguments);
   }
 
   copyFrom(q2) {
@@ -31,6 +25,27 @@ export class Quaternion {
 		return this;
   }
 
+  set(x, y, z, w) {
+    if (typeof x === 'object') {
+      if (x instanceof Vec3) {
+        // set from (vec3, w)
+        this.x = x.x;
+        this.y = x.y;
+        this.z = x.z;
+        this.w = arguments[1];
+      } else {
+        // set from (vec4 or q)
+        this.copyFrom(x);
+      }
+    } else {
+      // set from (x, y, z, w)
+      this.x = !isNaN(x) ? x : 0;
+      this.y = !isNaN(y) ? y : 0;
+      this.z = !isNaN(z) ? z : 0;
+      this.w = !isNaN(w) ? w : 1;
+    }
+  }
+
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
   }
@@ -39,7 +54,7 @@ export class Quaternion {
     let len = this.length();
 
     if (len < EPSILON) {
-      return Quaternion.Zero;
+      return Quaternion.zero;
     }
 
     len = 1 / len;
@@ -125,14 +140,6 @@ export class Quaternion {
     return new Quaternion(q1.x + q2.x, q1.y + q2.y, q1.z + q2.z, q1.w + q2.w);
   }
 
-  // multiply(q) {
-  //   return this.perfromMultiply(this, q);
-  // }
-
-  // premultiply(q) {
-  //   return this.perfromMultiply(q, this);
-  // }
-
 	static mul(q1, q2) {
 		// from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
 
@@ -153,11 +160,12 @@ export class Quaternion {
       throw new Error('Quaternion.setFromEuler() expects an object contains x, y, z properties');
     }
 
-    const { x, y, z } = euler;
+    let { x, y, z } = euler;
+    x = x / 180 * Math.PI;
+    y = y / 180 * Math.PI;
+    z = z / 180 * Math.PI;
 
-    // http://www.mathworks.com/matlabcentral/fileexchange/
-    // 	20696-function-to-convert-between-dcm-euler-angles-quaternions-and-euler-vectors/
-    //	content/SpinCalc.m
+    // http://www.mathworks.com/matlabcentral/fileexchange/20696-function-to-convert-between-dcm-euler-angles-quaternions-and-euler-vectors/content/SpinCalc.m
 
     const cos = Math.cos;
     const sin = Math.sin;
@@ -228,6 +236,98 @@ export class Quaternion {
     return q;
   }
 
+  // original code copied from threejs
+  // https://github.com/mrdoob/three.js/blob/master/src/math/Quaternion.js
+  //
+  setFromVectors(from, to) {
+    // // assumes direction vectors vFrom and vTo are normalized
+    // const EPS = 0.000001;
+    // let r = Vec3.dot(from, to) + 1;
+
+    // if (r < EPS) {
+    //   r = 0;
+
+    //   if (Math.abs(from.x) > Math.abs(from.z)) {
+    //     this.x = -from.y;
+    //     this.y = from.x;
+    //     this.z = 0;
+    //     this.w = r;
+    //   } else {
+    //     this.x = 0;
+    //     this.y = -from.z;
+    //     this.z = from.y;
+    //     this.w = r;
+    //   }
+    // } else {
+    //   // crossVectors( vFrom, vTo ); // inlined to avoid cyclic dependency on Vector3
+    //   this.x = from.y * to.z - from.z * to.y;
+    //   this.y = from.z * to.x - from.x * to.z;
+    //   this.z = from.x * to.y - from.y * to.x;
+    //   this.w = r;
+    // }
+
+    const a = Vec3.cross(from, to);
+    const w = Math.sqrt((from.length() ** 2) * (to.length() ** 2)) + Vec3.dot(from, to);
+    
+    this.set(a, w);
+
+    return this.normalize();
+  }
+
+  static fromVectors(from, to) {
+    const q = new Quaternion();
+    q.setFromVectors(from, to);
+    return q;
+  }
+
+  // original code copied from threejs
+  // https://github.com/mrdoob/three.js/blob/master/src/math/Quaternion.js
+  //
+  setFromRotationMatrix(m) {
+    // http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
+    // assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
+
+    const 
+      m11 = m.a1, m12 = m.a2, m13 = m.a3,
+      m21 = m.b1, m22 = m.b2, m23 = m.b3,
+      m31 = m.c1, m32 = m.c2, m33 = m.c3,
+      trace = m11 + m22 + m33;
+
+    if (trace > 0) {
+      const s = 0.5 / Math.sqrt(trace + 1.0);
+      this.x = (m32 - m23) * s;
+      this.y = (m13 - m31) * s;
+      this.z = (m21 - m12) * s;
+      this.w = 0.25 / s;
+    } else if (m11 > m22 && m11 > m33) {
+      const s = 2.0 * Math.sqrt(1.0 + m11 - m22 - m33);
+      this.x = 0.25 * s;
+      this.y = (m12 + m21) / s;
+      this.z = (m13 + m31) / s;
+      this.w = (m32 - m23) / s;
+    } else if (m22 > m33) {
+      const s = 2.0 * Math.sqrt(1.0 + m22 - m11 - m33);
+      this.x = (m12 + m21) / s;
+      this.y = 0.25 * s;
+      this.z = (m23 + m32) / s;
+      this.w = (m13 - m31) / s;
+    } else {
+      const s = 2.0 * Math.sqrt(1.0 + m33 - m11 - m22);
+      this.x = (m13 + m31) / s;
+      this.y = (m23 + m32) / s;
+      this.z = 0.25 * s;
+      this.w = (m21 - m12) / s;
+    }
+
+    return this;
+  }
+
+  static fromRotationMatrix(m) {
+    const q = new Quaternion();
+    q.setFromRotationMatrix(m);
+    return q;
+  }
+
   // multiply(q) {
   //   return this.perfromMultiply(this, q);
   // }
@@ -291,4 +391,4 @@ export class Quaternion {
 
 };
 
-Quaternion.Zero = new Quaternion(0, 0, 0, 1);
+Quaternion.zero = new Quaternion(0, 0, 0, 1);
