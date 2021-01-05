@@ -12,6 +12,7 @@ The following classes available under [src](src) folder.
 - [Vector3](src/vec3.js)
 - [Matrix3](src/matrix3.js)
 - [Matrix4](src/matrix4.js)
+- [Quaternion](src/quaternion.js)
 - [BoundingBox 2D](src/bbox2.js)
 - [BoundingBox 3D](src/bbox3.js)
 - KDTree for 2D points
