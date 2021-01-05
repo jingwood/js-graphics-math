@@ -50,12 +50,12 @@ testSuite("Quaternion")
     
     const m1 = Matrix4.createLookAt(v1, v2);
     const m2 = q.toMatrix();
-    const euler = m2.extractEulerAngles();
 
-    console.log(m1, m2, euler);
+    // const euler = m2.extractEulerAngles();
+    // console.log(m1, m2, euler);
 
     const t1 = m1.approxiEquals(m2);
-    console.log(t1);
+    // console.log(t1);
     t.assert(t1);
   })
   .stats()
