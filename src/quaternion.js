@@ -26,7 +26,12 @@ export class Quaternion {
   }
 
   set(x, y, z, w) {
-    if (typeof x === 'object') {
+    if (Array.isArray(x)) {
+      this.x = x[0];
+      this.y = x[1];
+      this.z = x[2];
+      this.w = x[3];
+    } else if (typeof x === 'object') {
       if (x instanceof Vec3) {
         // set from (vec3, w)
         this.x = x.x;
