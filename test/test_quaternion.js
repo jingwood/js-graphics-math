@@ -1,8 +1,8 @@
-import { testSuite } from "./framework.js";
-import { Quaternion } from "../src/quaternion.js";
-import { Matrix4 } from "../src/matrix4.js";
-import { approxiEquals } from "../src/functions.js";
-import { Vec3 } from "../src/vec3.js";
+const { testSuite } = require("./framework.js")
+const { Quaternion } = require("../src/quaternion.js")
+const { Matrix4 } = require("../src/matrix4.js")
+const { approxiEquals } = require("../src/functions.js")
+const { Vec3 } = require("../src/vec3.js")
 
 testSuite("Quaternion")
   .test("toMatrix", function(t) {

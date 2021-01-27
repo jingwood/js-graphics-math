@@ -1,6 +1,6 @@
-import { Matrix4 } from "../src/matrix4.js";
-import { Vec3 } from "../src/vec3.js";
-import { testSuite } from "./framework.js";
+const { Matrix4 } = require("../src/matrix4.js")
+const { Vec3 } = require("../src/vec3.js")
+const { testSuite } = require("./framework.js")
 
 testSuite("Matrix4")
   .test("rotate", function(t) {

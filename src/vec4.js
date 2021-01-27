@@ -5,10 +5,11 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3.js";
-import { roundDigits } from "./utility.js";
+const { Vec3 } = require("./vec3.js");
+const { roundDigits } = require("./utility.js");
+const { MathFunctions } = require("./functions.js");
 
-export class Vec4 {
+class Vec4 {
 	constructor(x, y, z, w) {
 		
 		let obj;
@@ -162,6 +163,20 @@ export class Vec4 {
 	lerp(v1, v2, t) {
 		return v1.lerp(v2, t);
 	}
+	
+	clamp(min = 0, max = 1) {
+		this.x = MathFunctions.clamp(this.x, min, max);
+		this.y = MathFunctions.clamp(this.y, min, max);
+		this.z = MathFunctions.clamp(this.z, min, max);
+		this.w = MathFunctions.clamp(this.w, min, max);
+	}
+
+	static clamp(v, min = 0, max = 1) {
+		return new Vec4(MathFunctions.clamp(v.x, min, max),
+			MathFunctions.clamp(v.y, min, max),
+			MathFunctions.clamp(v.z, min, max),
+			MathFunctions.clamp(v.w, min, max));
+	}
 
 	clone() {
 		return new Vec4(this.x, this.y, this.z, this.w);
@@ -176,3 +191,5 @@ export class Vec4 {
 		roundDigits(this.z, digits), roundDigits(this.w, digits)];
 	}
 }
+
+module.exports = { Vec4 };

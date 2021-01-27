@@ -5,10 +5,10 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec2 } from "./vec2.js";
-import { MathFunctions2 as _mf2 } from "./functions2.js";
+const { Vec2 } = require("./vec2.js");
+const { MathFunctions2 = _mf2 } = require("./functions2.js");
 
-export class BoundingBox2D {
+class BoundingBox2D {
 	constructor() {
 		this.set(...arguments);
 	}
@@ -236,3 +236,5 @@ export class BoundingBox2D {
 		return new BoundingBox2D(new Vec2(minx, miny), new Vec2(maxx, maxy));
 	}
 }
+
+module.exports = { BoundingBox2D };

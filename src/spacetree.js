@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3.js";
+const { Vec3 } = require("./vec3.js");
 
 class SpaceTreeNode {
   constructor(origin, size) {

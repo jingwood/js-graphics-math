@@ -5,29 +5,51 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Matrix4 } from "./matrix4.js";
-import { Vec2 } from "./vec2.js";
-import { toStringWithDigits, roundDigits } from "./utility.js";
-import { approxiEquals } from "./functions.js";
-import { EPSILON } from "./const.js";
-import { approxiEquals3 } from "./functions3.js";
+const { Matrix4 } = require("./matrix4.js")
+const { Vec2 } = require('./vec2.js');
+const { toStringWithDigits, roundDigits } = require("./utility.js")
+const { approxiEquals } = require("./functions.js")
+const { EPSILON } = require("./const.js")
 
-export class Vec3 {
+class Vec3 {
 	constructor() {
 		this.x = 0; this.y = 0; this.z = 0;
 		this.set(...arguments);
 	}
 
-	set() {
+	set(arg0, arg1) {
 		switch (arguments.length) {
 			case 1:
-				const arg0 = arguments[0];
-				if (typeof arg0 === "object") {
+				if (Array.isArray(arg0)) {
+					this.x = arg0[0];
+					this.y = arg0[1];
+					this.z = arg0[2];
+				} else if (typeof arg0 === "object") {
 					this.x = arg0.x; this.y = arg0.y; this.z = arg0.z;
-				} else if (Array.isArray(arg0)) {
-					this.x = arg0[0]; this.y = arg0[1]; this.z = arg0[2];
 				} else if (!isNaN(arg0)) {
 					this.x = arg0; this.y = arg0; this.z = arg0;
+				}
+				break;
+			
+			case 2:
+				if (Array.isArray(arg0)) {
+					this.x = arg0[0];
+					this.y = arg0[1];
+					if (!isNaN(arg1)) {
+						this.z = arg1;
+					}
+				} else if (typeof arg0 === "object") {
+					this.x = arg0.x; this.y = arg0.y;
+					if (!isNaN(arg1)) {
+						this.z = arg1;
+					}
+				} else {
+					if (!isNaN(arg0)) {
+						this.x = arg0;
+					}
+					if (!isNaN(arg1)) {
+						this.y = arg1;
+					}
 				}
 				break;
 			
@@ -73,8 +95,12 @@ export class Vec3 {
       return false;
     }
 
-    return approxiEquals3(this, v2, epsilon);
-  }
+    return Vec3.approxiEquals3(this, v2, epsilon);
+	}
+	
+	static approxiEquals3(v1, v2, epsilon = EPSILON) {
+  	return approxiEquals(v1.x, v2.x, epsilon) && approxiEquals(v1.y, v2.y, epsilon) && approxiEquals(v1.z, v2.z, epsilon);
+	}
 	
 	mulMat(m) {
 		return new Vec3(
@@ -168,6 +194,10 @@ export class Vec3 {
 	abs() {
 		return new Vec3(Math.abs(this.x), Math.abs(this.y), Math.abs(this.z));
 	}
+
+	static abs(v) {
+		return new Vec3(Math.abs(v.x), Math.abs(v.y), Math.abs(v.z));
+	}
 	
 	lerp(v2, t) {
 		return this.add((v2.sub(this)).mul(t));
@@ -254,6 +284,18 @@ export class Vec3 {
 			-(v1.x * v2.z - v1.z * v2.x),
 			v1.x * v2.y - v1.y * v2.x);
 	}
+	
+	clamp(min = 0, max = 1) {
+		this.x = MathFunctions.clamp(this.x, min, max);
+		this.y = MathFunctions.clamp(this.y, min, max);
+		this.z = MathFunctions.clamp(this.z, min, max);
+	}
+
+	static clamp(v, min = 0, max = 1) {
+		return new Vec3(MathFunctions.clamp(v.x, min, max),
+			MathFunctions.clamp(v.y, min, max),
+			MathFunctions.clamp(v.z, min, max));
+	}
 }
 
 Vec3.createFromEulers = (function() {
@@ -291,3 +333,5 @@ Vec3.Left = new Vec3(-1, 0, 0);
 Vec3.Right = new Vec3(1, 0, 0);
 Vec3.Forward = new Vec3(0, 0, -1);
 Vec3.Back = new Vec3(0, 0, 1);
+
+module.exports = { Vec3 };

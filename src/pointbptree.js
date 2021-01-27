@@ -5,9 +5,9 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { BoundingBox } from "./bbox3";
+const { BoundingBox } = require("./bbox3")
 
-export class PointBPNode {
+class PointBPNode {
 	constructor(inputPoints) {
 		this.points = [];
 
@@ -84,3 +84,5 @@ export class PointBPNode {
 		return false;
 	}
 }
+
+module.exports = { PointBPNode };

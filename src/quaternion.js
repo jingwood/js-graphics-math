@@ -5,12 +5,11 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { EPSILON } from "./const.js";
-import { Vec3 } from "./vec3.js";
-import { Matrix4 } from "./matrix4.js";
+const { EPSILON } = require("./const.js")
+const { Vec3 } = require("./vec3.js");
+const { Matrix4 } = require("./matrix4.js")
 
-// Experimental!!
-export class Quaternion {
+class Quaternion {
 
   constructor(x, y, z, w) {
     this.set(...arguments);
@@ -397,3 +396,5 @@ export class Quaternion {
 };
 
 Quaternion.zero = new Quaternion(0, 0, 0, 1);
+
+module.exports = { Quaternion };

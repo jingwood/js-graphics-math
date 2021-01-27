@@ -5,18 +5,23 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-export { BoundingBox2D } from "./bbox2.js";
-export { BoundingBox3D } from "./bbox3.js";
-export { Color3 } from "./color3.js";
-export { Color4 } from "./color4.js";
-export { MathFunctions } from "./functions.js";
-export { MathFunctions2 } from "./functions2.js";
-export { MathFunctions3 } from "./functions3.js";
-export { Matrix3 } from "./matrix3.js";
-export { Matrix4 } from "./matrix4.js";
-export { Ray } from "./ray.js";
-export { } from "./utility.js";
-export { Vec2 } from "./vec2.js";
-export { Vec3 } from "./vec3.js";
-export { Vec4 } from "./vec4.js";
-export { Quaternion } from "./quaternion.js";
+const { BoundingBox2D } = require("./bbox2.js")
+const { BoundingBox3D } = require("./bbox3.js")
+const { Color3 } = require("./color3.js")
+const { Color4 } = require("./color4.js")
+const { MathFunctions } = require("./functions.js")
+const { MathFunctions2 } = require("./functions2.js")
+const { MathFunctions3 } = require("./functions3.js")
+const { Matrix3 } = require("./matrix3.js")
+const { Matrix4 } = require("./matrix4.js")
+const { Ray } = require("./ray.js")
+const { } = require("./utility.js")
+const { Vec2 } = require("./vec2.js")
+const { Vec3 } = require("./vec3.js")
+const { Vec4 } = require("./vec4.js")
+const { Quaternion } = require("./quaternion.js")
+
+module.exports = {
+  BoundingBox2D, BoundingBox3D, Color3, Color4, MathFunctions, MathFunctions2, MathFunctions3,
+  Matrix3, Matrix4, Ray, Vec2, Vec3, Vec4, Quaternion
+}

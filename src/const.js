@@ -5,5 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-export const EPSILON = 0.00001;
-export const PIAngleDelta = Math.PI / 180.0;
+const EPSILON = 0.00001;
+const PIAngleDelta = Math.PI / 180.0;
+
+module.exports = { EPSILON, PIAngleDelta };

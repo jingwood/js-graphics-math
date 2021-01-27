@@ -1,6 +1,6 @@
-import { Vec2 } from "../src/vec2.js";
-import { BoundingBox2D } from "../src/bbox2.js";
-import { testSuite } from "./framework.js";
+const { Vec2 } = require("../src/vec2.js")
+const { BoundingBox2D } = require("../src/bbox2.js")
+const { testSuite } = require("./framework.js")
 
 testSuite("BBox2")
   .test("containsPoint", function(t) {

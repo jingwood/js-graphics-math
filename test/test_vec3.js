@@ -1,5 +1,5 @@
-import { Vec3 } from "../src/vec3.js";
-import { testSuite } from "./framework.js";
+const { Vec3 } = require("../src/vec3.js")
+const { testSuite } = require("./framework.js")
 
 testSuite("Vec3")
   .test("add", function(t) {

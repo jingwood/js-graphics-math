@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { toStringWithDigits } from "./utility";
+const { toStringWithDigits } = require("./utility");
 
 export class Color3 {
 	constructor(r, g, b) {
@@ -131,3 +131,5 @@ Color3.black = new Color3(0.0, 0.0, 0.0);
 Color3.red = new Color3(1.0, 0.0, 0.0);
 Color3.green = new Color3(0.0, 1.0, 0.0);
 Color3.blue = new Color3(0.0, 0.0, 1.0);
+
+module.exports = { Color3 };

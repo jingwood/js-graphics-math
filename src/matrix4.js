@@ -5,12 +5,12 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3.js";
-import { approxiEquals, MathFunctions } from "./functions.js";
-import { EPSILON } from "./const.js";
-import { Vec4 } from "./vec4.js";
+const { Vec3 } = require("./vec3.js");
+const { approxiEquals, MathFunctions } = require("./functions.js")
+const { EPSILON } = require("./const.js")
+const { Vec4 } = require("./vec4.js");
 
-export class Matrix4 {
+class Matrix4 {
 	constructor(copySource) {
 		this.arr = new Array(16);
 
@@ -568,3 +568,5 @@ export class Matrix4 {
 
 Matrix4.Identity = new Matrix4().loadIdentity();
 Matrix4.IdentityArray = new Matrix4().loadIdentity().toArray();
+
+module.exports = { Matrix4 };

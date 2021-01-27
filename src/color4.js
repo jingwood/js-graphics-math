@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Color3 } from "./color3.js";
+const { Color3 } = require("./color3.js");
 
 export class Color4 {
 	constructor(r, g, b, a) {
@@ -85,3 +85,5 @@ export class Color4 {
 
 Color4.white = new Color4(Color3.white, 1.0);
 Color4.black = new Color4(Color3.black, 1.0);
+
+module.exports = { Color4 };

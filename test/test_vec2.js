@@ -1,7 +1,13 @@
-import { testSuite } from "./framework.js";
-import { Vec2 } from "../src/vec2.js";
+const { testSuite } = require('./framework.js');
+const { Vec2 } = require("../src/vec2.js");
 
 testSuite("Vec2")
+  .test('constructor', t => {
+    const v1 = new Vec2(1, 2);
+
+    t.assert(v1.x, 1);
+    t.assert(v1.y, 2);
+  })
   .test("add", function(t) {
     const v1 = new Vec2(1, 2);
     const v2 = new Vec2(2, 3);

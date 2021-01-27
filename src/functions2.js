@@ -5,22 +5,13 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec2 } from "./vec2.js";
-import { approxiEquals, MathFunctions } from "./functions.js";
+const { approxiEquals, MathFunctions } = require("./functions.js");
 
-export function approxiEquals2(v1, v2) {
+function approxiEquals2(v1, v2) {
   return approxiEquals(v1.x, v2.x) && approxiEquals(v1.y, v2.y);
 }
 
-export class MathFunctions2 {
-  static clamp2(v, min = 0, max = 1) {
-    return new Vec2(MathFunctions.clamp(v.x, min, max), MathFunctions.clamp(v.y, min, max));
-  }
-
-  static abs2(v) {
-    return new Vec2(Math.abs(v.x), Math.abs(v.y));
-  }
-
+class MathFunctions2 {
   static distancePointToPoint(p1, p2) {
     return MathFunctions2.distancePointToPointXY(p1.x, p1.y, p2.x, p2.y);
   }
@@ -363,3 +354,5 @@ export class MathFunctions2 {
   }
 
 }
+
+module.exports = { approxiEquals2, MathFunctions2 };

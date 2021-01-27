@@ -5,10 +5,10 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3"
-import { BoundingBox3D } from "./bbox3"
+const { Vec3 } = require("./vec3")
+const { BoundingBox3D } = require("./bbox3")
 
-export class KDNode3D {
+class KDNode3D {
   constructor() {
     this.bbox = undefined;
     this.left = undefined;
@@ -129,3 +129,5 @@ export class KDNode3D {
     return true;
   }
 }
+
+module.exports = { KDNode3D };

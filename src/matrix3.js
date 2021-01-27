@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-export class Matrix3 {
+class Matrix3 {
 	constructor(copySource) {
 		if (copySource) {
 			this.copyFrom(copySource);
@@ -196,3 +196,5 @@ export class Matrix3 {
 }
 
 Matrix3.identity = new Matrix3().loadIdentity();
+
+module.exports = { Matrix3 };

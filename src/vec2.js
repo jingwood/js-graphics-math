@@ -5,10 +5,10 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { toStringWithDigits } from "./utility.js";
-import { approxiEquals } from "./functions.js";
+const { toStringWithDigits } = require('./utility.js');
+const { approxiEquals } = require("./functions.js");
 
-export class Vec2 {
+class Vec2 {
 	constructor() {
 		this.x = 0; this.y = 0;
 		this.set(...arguments);
@@ -194,9 +194,22 @@ export class Vec2 {
 
   static abs(v) {
     return new Vec2(Math.abs(v.x), Math.abs(v.y));
-  }
+	}
+	
+	clamp(min = 0, max = 1) {
+		this.x = MathFunctions.clamp(this.x, min, max);
+		this.y = MathFunctions.clamp(this.y, min, max);
+	}
+
+	static clamp(v, min = 0, max = 1) {
+		return new Vec2(MathFunctions.clamp(v.x, min, max),
+			MathFunctions.clamp(v.y, min, max),
+			MathFunctions.clamp(v.z, min, max));
+	}
 }	
 
 Vec2.zero = new Vec2(0, 0);
 Vec2.one = new Vec2(1, 1);
 Vec2.NaN = new Vec2(NaN, NaN);
+
+module.exports = { Vec2 };

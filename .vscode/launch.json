@@ -14,7 +14,7 @@
       "args": [
         "--experimental-modules"
       ],
-      "program": "${workspaceFolder}/test/test_all.js"
+      "program": "${workspaceFolder}/test/test_all.js",
     }
   ]
 }

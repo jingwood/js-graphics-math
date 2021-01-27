@@ -1,5 +1,5 @@
-import { testSuite } from "./framework.js";
-import { MathFunctions2 } from "../src/functions2.js";
+const { testSuite } = require("./framework.js")
+const { MathFunctions2 } = require("../src/functions2.js")
 
 testSuite("MathFunctions")
   .test("pointToNearestPolygon", function(t) {

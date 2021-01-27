@@ -1,4 +1,4 @@
-import { approxiEquals } from "../src/functions.js";
+const { approxiEquals } = require("../src/functions.js");
 
 function compare(a, b) {
   if (typeof a.equals === "function") {
@@ -75,4 +75,4 @@ function testSuite(name, cases) {
   return new _TestSuite(name, cases);
 }
 
-export { testSuite };
+module.exports = { testSuite };

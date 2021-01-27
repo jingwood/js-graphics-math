@@ -5,27 +5,12 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3.js"
-import { Vec4 } from "./vec4.js"
-import { approxiEquals, MathFunctions } from "./functions.js";
-import { EPSILON } from "./const.js";
+const { Vec3 } = require("./vec3.js")
+const { Vec4 } = require("./vec4.js")
+const { approxiEquals, MathFunctions } = require("./functions.js");
+const { EPSILON } = require("./const.js")
 
-export function approxiEquals3(v1, v2, epsilon = EPSILON) {
-  return approxiEquals(v1.x, v2.x, epsilon) && approxiEquals(v1.y, v2.y, epsilon) && approxiEquals(v1.z, v2.z, epsilon);
-}
-
-export class MathFunctions3 {
-  static clamp3(v, min = 0, max = 1) {
-    new Vec3(MathFunctions.clamp(v.x, min, max),
-        MathFunctions.clamp(v.y, min, max),
-        MathFunctions.clamp(v.z, min, max));
-  }
-
-  static abs3(v) {
-    if (v instanceof Vec3) {
-      return new Vec3(Math.abs(v.x), Math.abs(v.y), Math.abs(v.z));
-    }
-  }
+class MathFunctions3 {
 
   static eulerAnglesFromVectors(v1, v2) {
     const l = v1 - v2;
@@ -512,3 +497,4 @@ export class MathFunctions3 {
   }
 }
 
+module.exports = { MathFunctions3 };

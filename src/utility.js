@@ -12,4 +12,4 @@ function roundDigits(num, digits) {
   return Math.round(num * delta) / delta;
 }
 
-export { toStringWithDigits, roundDigits };
+module.exports = { toStringWithDigits, roundDigits };

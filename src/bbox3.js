@@ -5,10 +5,10 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3.js";
-import { Vec4 } from "./vec4.js";
+const { Vec3 } = require("./vec3.js");
+const { Vec4 } = require("./vec4.js");
 
-export class BoundingBox3D {
+class BoundingBox3D {
 	constructor() {
 		this.min = new Vec3();
 		this.max = new Vec3();
@@ -217,3 +217,5 @@ export class BoundingBox3D {
     );
 	}
 }
+
+module.exports = { BoundingBox3D };
