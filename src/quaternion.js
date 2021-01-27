@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 const { EPSILON } = require("./const.js")
-const { Vec3 } = require("./vec3.js");
+const { Vec3 } = require("./vec3.js")
 const { Matrix4 } = require("./matrix4.js")
 
 class Quaternion {
