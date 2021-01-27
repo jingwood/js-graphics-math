@@ -14,11 +14,13 @@ export class Vec2 {
 		this.set(...arguments);
 	}
 	
-	set() {
+	set(arg0) {
 		switch (arguments.length) {
 			case 1:
-				const arg0 = arguments[0];
-				if (arg0) {
+				if (Array.isArray(arg0)) {
+					this.x = arg0[0];
+					this.y = arg0[1];
+				} else if (typeof arg0 === 'object') {
 					this.x = arg0.x;
 					this.y = arg0.y;
 				}
