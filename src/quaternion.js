@@ -162,10 +162,21 @@ export class Quaternion {
   setFromEuler(euler, order = 'XYZ') {
 
     if (typeof euler !== 'object') {
-      throw new Error('Quaternion.setFromEuler() expects an object contains x, y, z properties');
+      throw new Error('Quaternion.setFromEuler() expects an object or array contains x, y, z properties');
     }
 
-    let { x, y, z } = euler;
+    let x, y, z;
+
+    if (Array.isArray(euler)) {
+      x = euler[0];
+      y = euler[1];
+      z = euler[2];
+    } else {
+      x = euler.x;
+      y = euler.y;
+      z = euler.z;
+    }
+
     x = x / 180 * Math.PI;
     y = y / 180 * Math.PI;
     z = z / 180 * Math.PI;
