@@ -405,6 +405,9 @@ export class Quaternion {
     return mat;
   }
 
+  toArray() {
+    return [this.x, this.y, this.z, this.w]
+  }
 };
 
 Quaternion.zero = new Quaternion(0, 0, 0, 1);
