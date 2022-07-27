@@ -33,7 +33,7 @@ export class MathFunctions2 {
   static distancePointToLine(p, l) {
     return MathFunctions2.distancePointToLineXYXY(p.x, p.y, l.start.x, l.start.y, l.end.x, l.end.y);
   }
-  
+
   static distancePointToLine2(p, lp1, lp2) {
     return MathFunctions2.distancePointToLineXYXY(p.x, p.y, lp1.x, lp1.y, lp2.x, lp2.y);
   }
@@ -58,15 +58,15 @@ export class MathFunctions2 {
     var B = py - y1;
     var C = x2 - x1;
     var D = y2 - y1;
-  
+
     var dot = A * C + B * D;
     var len_sq = C * C + D * D;
     var param = -1;
     if (len_sq != 0) //in case of 0 length line
       param = dot / len_sq;
-  
+
     var xx, yy;
-  
+
     if (param < 0) {
       xx = x1;
       yy = y1;
@@ -79,7 +79,7 @@ export class MathFunctions2 {
       xx = x1 + param * C;
       yy = y1 + param * D;
     }
-  
+
     var dx = px - xx;
     var dy = py - yy;
 
@@ -89,7 +89,7 @@ export class MathFunctions2 {
   static nearestPointToLineSegment(p, l) {
     return MathFunctions2.nearestPointToLineSegmentXYXY(p.x, p.y, l.x1, l.y1, l.x2, l.y2);
   }
-  
+
   static nearestPointToLineSegmentL1L2(p, lp1, lp2) {
     return MathFunctions2.nearestPointToLineSegmentXYXY(p.x, p.y, lp1.x, lp1.y, lp2.x, lp2.y);
   }
@@ -101,15 +101,15 @@ export class MathFunctions2 {
     var B = py - y1;
     var C = x2 - x1;
     var D = y2 - y1;
-  
+
     var dot = A * C + B * D;
     var len_sq = C * C + D * D;
     var param = -1;
     if (len_sq !== 0) //in case of 0 length line
       param = dot / len_sq;
-  
+
     var xx, yy;
-  
+
     if (param < 0) {
       xx = x1;
       yy = y1;
@@ -122,7 +122,7 @@ export class MathFunctions2 {
       xx = x1 + param * C;
       yy = y1 + param * D;
     }
-  
+
     var dx = px - xx;
     var dy = py - yy;
 
@@ -132,7 +132,7 @@ export class MathFunctions2 {
   // distanceLineToLine: function(l1, l2) {
   //   if (!this.checkParallelLines(l1, l2))
   //     return 0;
-    
+
   //   return this.distancePointToLine(l1.start, l2);
   // },
 
@@ -152,11 +152,11 @@ export class MathFunctions2 {
       lineIndex: undefined,
     };
 
-    for (let i = 0, j = 1; i < polygon.length; i++ , j++) {
+    for (let i = 0, j = 1; i < polygon.length; i++, j++) {
       if (j >= polygon.length) j = 0;
-      
+
       const px1 = polygon[i].x, py1 = polygon[i].y, px2 = polygon[j].x, py2 = polygon[j].y;
-      
+
       const r2 = MathFunctions2.nearestPointToLineSegmentXYXY(p.x, p.y, px1, py1, px2, py2);
       if (/*(!mindist || r2.dist < mindist) &&*/ r2.dist < ret.dist) {
         ret.dist = r2.dist;
@@ -175,7 +175,7 @@ export class MathFunctions2 {
 
     for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
       const p1 = polygon[i], p2 = polygon[j];
-      
+
       const dist = MathFunctions2.distancePointToLineSegmentXYXY(p.x, p.y, p1.x, p1.y, p2.x, p2.y);
       if (dist < minDist) minDist = dist;
     }
@@ -209,10 +209,10 @@ export class MathFunctions2 {
 
     for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
       const p1 = polygon[i], p2 = polygon[j];
-        
+
       const intersect = ((p1.y > p.y) != (p2.y > p.y))
         && (p.x < (p2.x - p1.x) * (p.y - p1.y) / (p2.y - p1.y) + p1.x);
-      
+
       if (intersect) inside = !inside;
     }
 
@@ -227,38 +227,41 @@ export class MathFunctions2 {
   }
 
   static calcPolygonArea(points) {
-    if (points.length < 2) return 0;
+    if (points.length < 2) return 0
 
     let a = 0;
-    
+
     for (let i = 0; i < points.length - 1; i++) {
-      const p1 = points[i], p2 = points[i + 1];
-      a += p1.x * p2.y - p1.y * p2.x;
+      const p1 = points[i], p2 = points[i + 1]
+      a += p1.x * p2.y - p1.y * p2.x
     }
-    
-    const p1 = points[points.length - 1], p2 = points[0];
-    const last = p1.x * p2.y - p1.y * p2.x;
-    
-    return Math.abs(a + last) * 0.5;
+
+    const p1 = points[points.length - 1], p2 = points[0]
+    const last = p1.x * p2.y - p1.y * p2.x
+
+    return Math.abs(a + last) * 0.5
+  }
+
+  static getVisualCenterPointOfPolygon() {
   }
 
   static lineIntersectsRect(l, r) {
     const containsStart = this.rectContainsPoint(r, l.start),
       containsEnd = this.rectContainsPoint(r, l.end);
-    
+
     if (containsStart || containsEnd) {
       return true;
     }
-    
+
     if (this.lineIntersectsLine(r.topEdge, l))
       return true;
-    
+
     if (this.lineIntersectsLine(r.bottomEdge, l))
       return true;
 
     if (this.lineIntersectsLine(r.leftEdge, l))
       return true;
-  
+
     if (this.lineIntersectsLine(r.rightEdge, l))
       return true;
 
@@ -280,7 +283,7 @@ export class MathFunctions2 {
     if (r1x1 > r2x2) return false;
     if (r1y2 < r2y1) return false;
     if (r1y1 > r2y2) return false;
-    
+
     return true;
   }
 
@@ -289,15 +292,15 @@ export class MathFunctions2 {
     for (let i = 0; i < polygon.length - 1; i++) {
       const px1 = polygon[i].x, py1 = polygon[i].y,
         px2 = polygon[i + 1].x, py2 = polygon[i + 1].y;
-      
-      if (this.lineIntersectsRect(new LineSegment2D(px1, py1, px2, py2), rect)) {
-        return true;
+
+      if (this.lineIntersectsRect({ start: { x: px1, y: py1 }, end: { x: px2, y: py2 } }, rect)) {
+        return true
       }
     }
 
-    return false;
+    return false
   }
-  
+
   static lineIntersectsLine(l1, l2) {
     return this.lineIntersectsLineXY(
       l1.start.x, l1.start.y, l1.end.x, l1.end.y,
@@ -317,13 +320,13 @@ export class MathFunctions2 {
       return (lambda >= 0 && lambda <= 1) && (gamma >= 0 && gamma <= 1);
     }
   }
-  
+
   static lineIntersectsLineXYGetPoint(line1StartX, line1StartY, line1EndX, line1EndY,
     line2StartX, line2StartY, line2EndX, line2EndY) {
     // original source: http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
-    
+
     const denominator = ((line2EndY - line2StartY) * (line1EndX - line1StartX)) - ((line2EndX - line2StartX) * (line1EndY - line1StartY));
-    
+
     if (denominator === 0) {
       return null;
     }
