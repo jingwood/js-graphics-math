@@ -10,7 +10,7 @@ import { roundDigits } from "./utility.js";
 
 export class Vec4 {
 	constructor(x, y, z, w) {
-		
+
 		let obj;
 
 		switch (arguments.length) {
@@ -20,10 +20,10 @@ export class Vec4 {
 				this.z = 0;
 				this.w = 0;
 				break;
-			
+
 			case 1:
 				obj = arguments[0];
-			
+
 				if (typeof obj === "object") {
 					if (obj instanceof Vec3) {
 						this.x = obj.x;
@@ -41,7 +41,7 @@ export class Vec4 {
 
 			case 2:
 				obj = arguments[0];
-			
+
 				if (typeof obj === "object") {
 					this.x = obj.x;
 					this.y = obj.y;
@@ -123,15 +123,15 @@ export class Vec4 {
 			this.x * m.b1 + this.y * m.b2 + this.z * m.b3 + this.w * m.b4,
 			this.x * m.c1 + this.y * m.c2 + this.z * m.c3 + this.w * m.c4,
 			this.x * m.d1 + this.y * m.d2 + this.z * m.d3 + this.w * m.d4);
-  }
-  
-  static mulMat(v, m) {
-    return new Vec4(
+	}
+
+	static mulMat(v, m) {
+		return new Vec4(
 			v.x * m.a1 + v.y * m.a2 + v.z * m.a3 + v.w * m.a4,
 			v.x * m.b1 + v.y * m.b2 + v.z * m.b3 + v.w * m.b4,
 			v.x * m.c1 + v.y * m.c2 + v.z * m.c3 + v.w * m.c4,
 			v.x * m.d1 + v.y * m.d2 + v.z * m.d3 + v.w * m.d4);
-  }
+	}
 
 	dot(v) {
 		return this.x * v.x + this.y * v.y + this.z * v.z + this.w * v.w;
@@ -147,7 +147,7 @@ export class Vec4 {
 
 	normalize() {
 		var scalar = 1 / this.length();
-	
+
 		if (isFinite(scalar)) {
 			return new Vec4(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
 		} else {

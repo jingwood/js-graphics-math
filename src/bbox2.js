@@ -19,26 +19,26 @@ export class BoundingBox2D {
 				this.min = Vec2.zero.clone();
 				this.max = Vec2.zero.clone();
 				break;
-			
+
 			case 1:
 				const bbox2 = arguments[0];
 				if (typeof bbox2.min === "object" && typeof bbox2.max === "object") {
 					this.set(bbox2.min, bbox2.max);
 				}
 				break;
-			
+
 			case 2:
 				this.min = arguments[0].clone();
 				this.max = arguments[1].clone();
 				break;
-			
+
 			case 4:
 				this.min.x = arguments[0];
 				this.min.y = arguments[1];
 				this.max.x = arguments[2];
 				this.max.y = arguments[3];
 				break;
-			
+
 			default:
 				throw new Error("BoundingBox2D: unsupported arguments to set");
 		}
@@ -48,8 +48,8 @@ export class BoundingBox2D {
 		return new BoundingBox2D(this);
 	}
 
-  get size() {
-    return { width: this.width, height: this.height };
+	get size() {
+		return { width: this.width, height: this.height };
 	}
 
 	set size({ width, height }) {
@@ -81,15 +81,15 @@ export class BoundingBox2D {
 	set origin({ x, y }) {
 		const { width, height } = this.size;
 		const hw = width * 0.5, hh = height * 0.5;
-		
+
 		this.min.x = x - hw; this.max.x = x + hw;
 		this.min.y = y - hh; this.max.y = y + hh;
 	}
 
 	get rect() {
-    const { x, y } = this.min;
-    const { width, height } = this.size;
-    return { x, y, width, height };
+		const { x, y } = this.min;
+		const { width, height } = this.size;
+		return { x, y, width, height };
 	}
 
 	inflate(x, y) {
@@ -127,20 +127,20 @@ export class BoundingBox2D {
 		this.updateFrom4Points(b1.min, b1.max, b2.min, b2.max);
 	}
 
-  updateFromPoints(vertices) {
-    if (vertices.length < 1) {
-      throw new Error("number of arguments must be greater than 1");
-    }
+	updateFromPoints(vertices) {
+		if (vertices.length < 1) {
+			throw new Error("number of arguments must be greater than 1");
+		}
 
-    const { x, y } = vertices[0];
+		const { x, y } = vertices[0];
 
 		this.min.x = x; this.min.y = y;
 		this.max.x = x; this.max.y = y;
 
 		for (let i = 1; i < vertices.length; i++) {
-      const { x, y } = vertices[i];
+			const { x, y } = vertices[i];
 			if (this.min.x > x) this.min.x = x;
-			if (this.min.y > y) this.min.y = y;			
+			if (this.min.y > y) this.min.y = y;
 			if (this.max.x < x) this.max.x = x;
 			if (this.max.y < y) this.max.y = y;
 		}
@@ -159,11 +159,11 @@ export class BoundingBox2D {
 	containsRect(rect) {
 		return rect.x >= this.min.x && rect.y >= this.min.y
 			&& rect.right < this.max.x && rect.bottom < this.max.y;
-  }
-  
-  intersectsRect(rect) { 
-    return _mf2.rectIntersectsRect(this.rect, rect);
-  }
+	}
+
+	intersectsRect(rect) {
+		return _mf2.rectIntersectsRect(this.rect, rect);
+	}
 
 	intersectsBBox2D(box2) {
 		if (this.max.x < box2.min.x) return false;
@@ -206,8 +206,8 @@ export class BoundingBox2D {
 		return bbox;
 	}
 
-  applyTransform(matrix) {
-    const v1 = this.min.mulMat(matrix);
+	applyTransform(matrix) {
+		const v1 = this.min.mulMat(matrix);
 		const v2 = new Vec2(this.max.x, this.min.y).mulMat(matrix);
 		const v3 = new Vec2(this.min.x, this.max.y).mulMat(matrix);
 		const v4 = this.max.mulMat(matrix);
@@ -216,7 +216,7 @@ export class BoundingBox2D {
 		this.min.y = Math.min(v1.y, v2.y, v3.y, v4.y);
 		this.max.x = Math.max(v1.x, v2.x, v3.x, v4.x);
 		this.max.y = Math.max(v1.y, v2.y, v3.y, v4.y);
-  }
+	}
 
 	transform(matrix) {
 		return BoundingBox2D.transform(this, matrix);

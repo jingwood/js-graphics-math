@@ -87,7 +87,7 @@ export class Matrix3 {
 
 	scale(x, y) {
 		if (x === 1 && y === 1) return this;
-	
+
 		this.a1 *= x; this.b1 *= x; this.c1 *= x;
 		this.a2 *= y; this.b2 *= y; this.c2 *= y;
 
@@ -98,7 +98,7 @@ export class Matrix3 {
 		const detM
 			= this.a1 * this.b2 * this.c3 + this.b1 * this.c2 * this.a3 + this.c1 * this.a2 * this.b3
 			- this.c1 * this.b2 * this.a3 - this.b1 * this.a2 * this.c3 - this.a1 * this.c2 * this.b3;
-		
+
 		if (detM === 0) return this.clone();
 
 		const ka1 = this.b2 * this.c3 - this.c2 * this.b3;
@@ -117,7 +117,7 @@ export class Matrix3 {
 		m.a1 = q * ka1; m.b1 = -q * kb1; m.c1 = q * kc1;
 		m.a2 = -q * ka2; m.b2 = q * kb2; m.c2 = -q * kc2;
 		m.a3 = q * ka3, m.b3 = -q * kb3, m.c3 = q * kc3;
-		
+
 		return m;
 	}
 
@@ -168,7 +168,7 @@ export class Matrix3 {
 		m3.a3 = m1.a1 * m2.a3 + m1.a2 * m2.b3 + m1.a3 * m2.c3;
 		m3.b3 = m1.b1 * m2.a3 + m1.b2 * m2.b3 + m1.b3 * m2.c3;
 		m3.c3 = m1.c1 * m2.a3 + m1.c2 * m2.b3 + m1.c3 * m2.c3;
-	
+
 		return m3;
 	}
 

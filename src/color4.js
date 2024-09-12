@@ -14,7 +14,7 @@ export class Color4 {
 			case 0:
 				this.r = 0; this.g = 0; this.b = 0; this.a = 0;
 				break;
-			
+
 			case 1:
 				if (typeof r === "object") {
 					if (r instanceof Color3) {
@@ -39,7 +39,7 @@ export class Color4 {
 			case 3:
 				this.r = r; this.g = g; this.b = b; this.a = 1;
 				break;
-			
+
 			case 4:
 				this.r = r; this.g = g; this.b = b; this.a = a;
 				break;

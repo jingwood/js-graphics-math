@@ -32,7 +32,7 @@ export class BoundingBox3D {
 				this._min.set(arguments[0]);
 				this._max.set(arguments[1]);
 				break;
-			
+
 			case 6:
 				this._min = new Vec3(arguments[0], arguments[1], arguments[2]);
 				this._max = new Vec3(arguments[3], arguments[4], arguments[5]);
@@ -91,18 +91,18 @@ export class BoundingBox3D {
 		}
 
 		return this._origin;
-  }
-  
-  makeDirty() {
-    this._dirty = true;
-  }
+	}
+
+	makeDirty() {
+		this._dirty = true;
+	}
 
 	offset(off) {
 		this._max = Vec3.add(this._max, off);
 		this._min = Vec3.add(this._min, off);
 		this._origin = Vec3.add(this._origin, off);
 	}
-	
+
 	// @deprecate(containsPoint, "use containsPoint instead")
 	contains(p) {
 		return this.containsPoint(p);
@@ -161,27 +161,27 @@ export class BoundingBox3D {
 
 		return bbox;
 	}
-	
+
 	static fromVertexArray(vertices, start, count) {
 		const bbox = new BoundingBox3D();
-		
+
 		if (count <= 0) {
 			return bbox;
 		}
 
 		bbox.initTo(vertices[start]);
-		
+
 		// if (count <= 1) {
 		// 	bbox.
 
 	}
-  
+
 	static findBoundingBoxOfBoundingBoxes(bboxA, bboxB) {
 		if (!bboxA && !bboxB) return null;
 		if (!bboxA) return bboxB;
 		if (!bboxB) return bboxA;
 
-    const bbox = new BoundingBox3D();
+		const bbox = new BoundingBox3D();
 
 		bbox.min.x = bboxA.min.x < bboxB.min.x ? bboxA.min.x : bboxB.min.x;
 		bbox.max.x = bboxA.max.x > bboxB.max.x ? bboxA.max.x : bboxB.max.x;
@@ -190,13 +190,13 @@ export class BoundingBox3D {
 		bbox.max.y = bboxA.max.y > bboxB.max.y ? bboxA.max.y : bboxB.max.y;
 
 		bbox.min.z = bboxA.min.z < bboxB.min.z ? bboxA.min.z : bboxB.min.z;
-    bbox.max.z = bboxA.max.z > bboxB.max.z ? bboxA.max.z : bboxB.max.z;
+		bbox.max.z = bboxA.max.z > bboxB.max.z ? bboxA.max.z : bboxB.max.z;
 
-    bbox.makeDirty();
+		bbox.makeDirty();
 
 		return bbox;
 	}
-	
+
 	static transformBoundingBox(bbox, matrix) {
 		var ruf = new Vec4(bbox.max.x, bbox.max.y, bbox.max.z, 1).mulMat(matrix);
 		var rub = new Vec4(bbox.max.x, bbox.max.y, bbox.min.z, 1).mulMat(matrix);
@@ -211,9 +211,9 @@ export class BoundingBox3D {
 		var yList = [ruf.y, rub.y, rdf.y, rdb.y, luf.y, lub.y, ldf.y, ldb.y];
 		var zList = [ruf.z, rub.z, rdf.z, rdb.z, luf.z, lub.z, ldf.z, ldb.z];
 
-    return new BoundingBox3D(
+		return new BoundingBox3D(
 			new Vec3(Math.min.apply(null, xList), Math.min.apply(null, yList), Math.min.apply(null, zList)),
 			new Vec3(Math.max.apply(null, xList), Math.max.apply(null, yList), Math.max.apply(null, zList))
-    );
+		);
 	}
 }

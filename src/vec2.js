@@ -13,7 +13,7 @@ export class Vec2 {
 		this.x = 0; this.y = 0;
 		this.set(...arguments);
 	}
-	
+
 	set(arg0) {
 		switch (arguments.length) {
 			case 1:
@@ -25,7 +25,7 @@ export class Vec2 {
 					this.y = arg0.y;
 				}
 				break;
-			
+
 			case 2:
 				this.x = arguments[0]; this.y = arguments[1];
 				break;
@@ -41,7 +41,7 @@ export class Vec2 {
 					this.y += arg0.y;
 				}
 				break;
-			
+
 			case 2:
 				this.x += arguments[0]; this.y += arguments[1];
 				break;
@@ -59,7 +59,7 @@ export class Vec2 {
 	sub(v2) {
 		return new Vec2(this.x - v2.x, this.y - v2.y);
 	}
-		
+
 	static sub(v1, v2) {
 		return new Vec2(v1.x - v2.x, v1.y - v2.y);
 	}
@@ -91,7 +91,7 @@ export class Vec2 {
 		return Vec2.div(this, v2);
 	}
 
-	static div(v1, v2) { 
+	static div(v1, v2) {
 		if (typeof v2 === "object") {
 			return new Vec2(v1.x / v2.x, v1.y / v2.y);
 		} else {
@@ -121,11 +121,11 @@ export class Vec2 {
 
 	static length(v) {
 		return Math.sqrt(v.x * v.x + v.y * v.y);
-  }
-  
-  static lengthBetween(v1, v2) {
-    return Vec2.length(Vec2.sub(v2, v1));
-  }
+	}
+
+	static lengthBetween(v1, v2) {
+		return Vec2.length(Vec2.sub(v2, v1));
+	}
 
 	normalize() {
 		return Vec2.normalize(this);
@@ -149,12 +149,12 @@ export class Vec2 {
 	}
 
 	equals(v2) {
-    return Vec2.equals(this, v2);
-  }
-  
-  static equals(v1, v2) {
-    return v1.x === v2.x && v1.y === v2.y;
-  }
+		return Vec2.equals(this, v2);
+	}
+
+	static equals(v1, v2) {
+		return v1.x === v2.x && v1.y === v2.y;
+	}
 
 	approxiEquals(v2) {
 		return Vec2.approxiEquals(this, v2);
@@ -162,8 +162,8 @@ export class Vec2 {
 
 	static approxiEquals(v1, v2) {
 		return approxiEquals(v1.x, v2.x) && approxiEquals(v1.y, v2.y);
-  }
-  
+	}
+
 	toString() {
 		return "[" + toStringWithDigits(this.x) + ", " + (this.y) + "]";
 	}
@@ -186,16 +186,16 @@ export class Vec2 {
 		let angle = Math.atan2((v2.y - v1.y), (v2.x - v1.x));
 		angle = angle * 180 / Math.PI;
 		return angle;
-  }
-  
-  abs() {
-    return Vec2.abs(this);
-  }
+	}
 
-  static abs(v) {
-    return new Vec2(Math.abs(v.x), Math.abs(v.y));
-  }
-}	
+	abs() {
+		return Vec2.abs(this);
+	}
+
+	static abs(v) {
+		return new Vec2(Math.abs(v.x), Math.abs(v.y));
+	}
+}
 
 Vec2.zero = new Vec2(0, 0);
 Vec2.one = new Vec2(1, 1);

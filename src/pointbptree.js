@@ -22,7 +22,7 @@ export class PointBPNode {
 
 	build(points) {
 		var bbox = BoundingBox3D.fromPoints(points);
-		
+
 		var lbox = new BoundingBox(), rbox = new BoundingBox();
 		var lpoints = new Array(), rpoints = new Array();
 
@@ -62,10 +62,10 @@ export class PointBPNode {
 		if (lpoints.length > 0) {
 			this.left = new PointBPNode(lpoints);
 		}
-		
+
 		if (rpoints.length > 0) {
 			this.right = new PointBPNode(rpoints);
-		}	
+		}
 	}
 
 	contains(p) {

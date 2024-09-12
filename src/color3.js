@@ -13,7 +13,7 @@ export class Color3 {
 			case 0:
 				this.r = 0; this.g = 0; this.b = 0;
 				break;
-			
+
 			case 1:
 				if (typeof r === "number") {
 					this.r = r; this.g = r; this.b = r;
@@ -44,7 +44,7 @@ export class Color3 {
 			case 0:
 				this.r = 0; this.g = 0; this.b = 0;
 				break;
-			
+
 			case 1:
 				if (typeof r === "number") {
 					this.r = r; this.g = r; this.b = r;
@@ -62,45 +62,45 @@ export class Color3 {
 	add(c) {
 		return new Color3(this.r + c.r, this.g + c.g, this.b + c.b);
 	}
-	
+
 	sub(c) {
 		return new Color3(this.r - c.r, this.g - c.g, this.b - c.b);
 	}
-	
+
 	mul(s) {
 		return new Color3(this.r * s, this.g * s, this.b * s);
 	}
-	
+
 	length() {
 		return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
 	}
-	
+
 	normalize() {
 		const scalar = 1 / this.length();
-		
+
 		if (isFinite(scalar)) {
 			return new Color3(this.x * scalar, this.y * scalar, this.z * scalar);
 		} else {
 			return new Color3();
 		}
 	};
-	
+
 	lerp(v2, t) {
 		return this.add((v2.sub(this)).mul(t));
 	}
-	
+
 	static lerp(v1, v2, t) {
 		return v1.lerp(v2, t);
 	}
-	
+
 	toArray() {
 		return [this.r, this.g, this.b];
 	}
-	
+
 	toFloat32Array() {
 		return new Float32Array(this.toArray());
 	}
-	
+
 	toString() {
 		return "[" + toStringWithDigits(this.r) + ", " + toStringWithDigits(this.g) + ", "
 			+ toStringWithDigits(this.b) + "]";
@@ -113,11 +113,11 @@ export class Color3 {
 	static randomly() {
 		return new Color3(Math.random(), Math.random(), Math.random());
 	};
-	
+
 	static randomlyLight() {
 		return new Color3(0.3 + Math.random() * 0.7, 0.3 + Math.random() * 0.7, 0.3 + Math.random() * 0.7);
 	};
-	
+
 	static randomlyDark() {
 		return new Color3(Math.random() * 0.5, Math.random() * 0.5, Math.random() * 0.5);
 	};
