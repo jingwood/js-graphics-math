@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/@jingwood/graphics-math.svg)
+![https://www.npmjs.com/package/@jingwood/graphics-math](https://img.shields.io/npm/v/@jingwood/graphics-math.svg)
 
 # js-graphics-math
 
