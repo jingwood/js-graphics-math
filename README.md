@@ -74,8 +74,8 @@ Functions below available at [src/functions.js](src/functions.js).
 
 # Software uses this library
 
-- tarumae-viewer - Optimized WebGL engine for Showcase application<br/>
-  [https://github.com/bulbinc/tarumae-viewer](https://github.com/bulbinc/tarumae-viewer)
+- Yotei3D - A lightweight WebGL-based 3D rendering engine designed with simplicity and ease of use in mind—even for users with minimal 3D programming experience.<br/>
+  [https://github.com/unvell/yotei3d](https://github.com/unvell/yotei3d)
 
 # Related Libraries
 
