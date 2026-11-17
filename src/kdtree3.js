@@ -5,8 +5,8 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { Vec3 } from "./vec3"
-import { BoundingBox3D } from "./bbox3"
+import { Vec3 } from "./vec3.js"
+import { BoundingBox3D } from "./bbox3.js"
 
 export class KDNode3D {
 	constructor() {

@@ -4,6 +4,37 @@
 
 Math library for JavaScript 2D/3D graphics rendering.
 
+# Installation
+
+```sh
+npm install @jingwood/graphics-math
+```
+
+# Usage
+
+The package is published as native ES modules with no dependencies. It works as-is in modern browsers, Node.js, and bundlers.
+
+```js
+import { Vec3, Matrix4 } from "@jingwood/graphics-math";
+
+const v = new Vec3(1, 2, 3).add(new Vec3(4, 5, 6));   // [5, 7, 9]
+const m = new Matrix4().loadIdentity().rotateY(90);
+const rotated = v.mulMat(m);                           // [9, 7, -5]
+```
+
+## Migrating from 1.x
+
+- The source is no longer transpiled by Babel, and `@babel/runtime` is no longer a dependency. If you need to support legacy browsers, transpile the package in your own build.
+- Only the package root (`@jingwood/graphics-math`) can be imported. Deep imports such as `@jingwood/graphics-math/dist/...` are no longer available.
+
+# Development
+
+Tests use the built-in Node.js test runner (Node.js 22 or later). No install step is needed.
+
+```sh
+npm test
+```
+
 # Classes
 
 The following classes available under [src](src) folder.

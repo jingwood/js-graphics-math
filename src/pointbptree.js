@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { BoundingBox } from "./bbox3";
+import { BoundingBox } from "./bbox3.js";
 
 export class PointBPNode {
 	constructor(inputPoints) {

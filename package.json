@@ -1,33 +1,32 @@
 {
   "name": "@jingwood/graphics-math",
-  "version": "1.1.19",
+  "version": "2.0.0",
   "type": "module",
   "description": "Math library for JavaScript 2D/3D graphics rendering.",
-  "main": "dist/index.js",
+  "exports": "./src/index.js",
+  "main": "./src/index.js",
   "files": [
-    "/dist"
+    "src"
   ],
+  "sideEffects": false,
   "scripts": {
-    "build": "npx babel src -d dist --verbose",
-    "test": "node --experimental-modules test/test_all.js",
-    "serve": ""
+    "test": "node --test \"test/*.test.js\"",
+    "prepublishOnly": "npm test"
   },
-  "keywords": [],
+  "keywords": [
+    "math",
+    "vector",
+    "matrix",
+    "quaternion",
+    "graphics",
+    "3d",
+    "2d"
+  ],
   "author": "Jingwood <jingwood@unvell.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/jingwood/js-graphics-math.git"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.9.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.5"
+    "url": "git+https://github.com/jingwood/js-graphics-math.git"
   },
   "bugs": {
     "url": "https://github.com/jingwood/js-graphics-math/issues"

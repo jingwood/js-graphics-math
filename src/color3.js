@@ -5,7 +5,7 @@
 // MIT License (c) 2015-2019 Jingwood, All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-import { toStringWithDigits } from "./utility";
+import { toStringWithDigits } from "./utility.js";
 
 export class Color3 {
 	constructor(r, g, b) {
