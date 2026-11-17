@@ -1,2 +1,7 @@
 node_modules/
 *.tgz
+
+# leftovers from the 1.x Babel/Parcel build
+dist/
+.parcel-cache/
+.cache/
